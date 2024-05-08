@@ -1,5 +1,5 @@
 /*
-	* Comments for this project were written while using "BETTER COMMENTS by Aaron Bond" as it provides better readability.
+	* Comments for this project were written while using VS Code Extension: "BETTER COMMENTS by Aaron Bond" as it provides better readability.
 */
 
 #include <zephyr/kernel.h>
