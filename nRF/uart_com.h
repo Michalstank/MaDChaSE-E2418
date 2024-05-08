@@ -106,7 +106,7 @@ void uart_dist_to_json(char* str, float f){
 	uart_put_string(str);
 	uart_put_string("\" : ");
 
-	char val[5];
+	char val[10];
 
 	itoa(d, val, 10);
 
@@ -119,7 +119,7 @@ void uart_int_to_json(char* str, int d){
 	uart_put_string(str);
 	uart_put_string("\" : ");
   	
-	char val[5];
+	char val[10];
 
 	itoa(d, val, 10);
 
@@ -135,7 +135,7 @@ void uart_tones_to_json(char* str, float* arr, uint32_t len){
 	for(uint32_t i = 0; i < len; i++){
 		int f = ((int)32*arr[i]);
 
-		char val[5];
+		char val[10];
 
 		itoa(f, val, 10);
 
@@ -157,7 +157,7 @@ void uart_uint8array_to_json(char* str, uint8_t* array,uint32_t length){
   uart_put_string("\":[");
   for (uint32_t i = 0; i < length; i++)
   {
-	char val[3];
+	char val[10];
 
 	itoa(array[i], val, 10);
 
@@ -180,7 +180,7 @@ void uart_sinr_to_json(char* str, nrf_dm_sinr_indicator_t* array, uint32_t lengt
   for (uint32_t i = 0; i < length; i++)
   {
 
-	char val[5];
+	char val[10];
 
 	itoa(array[i], val, 10);
 
