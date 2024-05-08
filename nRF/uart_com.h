@@ -20,7 +20,6 @@ static void uart_cb(const struct device*, struct uart_event*, void*);
 //Function Prototypes
 int     uart_put_char(uint8_t);
 void    uart_put_string(char*);
-void    uart_get_char();
 void    uart_dist_to_json(char*, float);
 void    uart_int_to_json(char*, int);
 
@@ -98,11 +97,6 @@ void uart_put_string(char* string){
 //Transmit Char
 int uart_put_char(uint8_t ch){
 	return !uart_tx(uart_dev, &ch, sizeof(ch), 0);
-}
-
-//Recive Char
-void uart_get_char(){
-	uart_rx_enable(uart_dev, uart_data, sizeof(uart_data), SYS_FOREVER_US);
 }
 
 //Transmit Distance Data Over Uart In Form Of JSON File
