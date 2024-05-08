@@ -27,7 +27,6 @@ void    uart_int_to_json(char*, int);
 void    uart_init();
 void    uart_uninit();
 
-void    uart_dm_clock_init(void);
 void    uart_tones_to_json(char*, float*, uint32_t);
 void    uart_sinr_to_json(char*, nrf_dm_sinr_indicator_t*, uint32_t);
 void    uart_uint8array_to_json(char*, uint8_t*, uint32_t);
