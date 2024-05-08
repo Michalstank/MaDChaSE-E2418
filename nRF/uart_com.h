@@ -100,7 +100,7 @@ int uart_put_char(uint8_t ch){
 }
 
 //Transmit Distance Data Over Uart In Form Of JSON File
-void uart_dist_to_json(char *str, float f){
+void uart_dist_to_json(char* str, float f){
 	int d = ((int)1000*f);
 	uart_put_string("\"");
 	uart_put_string(str);
@@ -114,7 +114,7 @@ void uart_dist_to_json(char *str, float f){
 }
 
 //Transmit Int Data Over Uart In Form Of JSON File
-void uart_int_to_json(char *str, int d){
+void uart_int_to_json(char* str, int d){
 	uart_put_string("\"");
 	uart_put_string(str);
 	uart_put_string("\" : ");
@@ -127,7 +127,7 @@ void uart_int_to_json(char *str, int d){
 }
 
 //Transmit Tones Data Over Uart In Form Of JSON File
-void uart_tones_to_json(char* str, float *arr, uint32_t len){
+void uart_tones_to_json(char* str, float* arr, uint32_t len){
 	uart_put_string("\"");
 	uart_put_string(str);
 	uart_put_string("\":[");
@@ -150,7 +150,7 @@ void uart_tones_to_json(char* str, float *arr, uint32_t len){
 }
 
 //Transmit Array Data Over Uart In Form Of JSON File
-void uart_uint8array_to_json(char * str, uint8_t *array,uint32_t length){
+void uart_uint8array_to_json(char* str, uint8_t* array,uint32_t length){
 
   uart_put_string("\"");
   uart_put_string(str);
@@ -172,7 +172,7 @@ void uart_uint8array_to_json(char * str, uint8_t *array,uint32_t length){
 }
 
 //Transmit SINR Data Over Uart In Form Of JSON File
-void uart_sinr_to_json(char * str, nrf_dm_sinr_indicator_t *array,uint32_t length){
+void uart_sinr_to_json(char* str, nrf_dm_sinr_indicator_t* array, uint32_t length){
 
   uart_put_string("\"");
   uart_put_string(str);
@@ -195,7 +195,7 @@ void uart_sinr_to_json(char * str, nrf_dm_sinr_indicator_t *array,uint32_t lengt
 }
 
 //Function To Compose Entire Measured/Important Data Into A JSON File And Transmit It Over Uart
-void uart_nrf_dm_report_to_json(nrf_dm_report_t *dm_report,float distance,int32_t duration, uint8_t *hopping_sequence){
+void uart_nrf_dm_report_to_json(nrf_dm_report_t* dm_report,float distance,int32_t duration, uint8_t* hopping_sequence){
   uart_put_string("J{\n");
 
   //- Print tones
