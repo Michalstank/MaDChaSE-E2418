@@ -238,7 +238,7 @@ io.on('connection', function(socket){
 });
 
 /*
-    * ON    - node_meas_start
+    * ON    - 
     * FROM  - 
     * TO    - RPI
 
