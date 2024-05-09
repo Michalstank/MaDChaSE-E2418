@@ -39,6 +39,8 @@ let node_meas_start = false;
 let node_cnt = 0;
 
 let wait_meas           = false
+
+//Varaibles used in the node selection algorithm
 let node_pair_id        = 0
 let node_pair_array     = []
 
