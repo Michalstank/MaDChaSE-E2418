@@ -231,10 +231,8 @@ io.on('connection', function(socket){
 
         node_connection_key_map.delete(socket.id)
 
-        if(node_data == current_initiator_id || node_data == current_reflector_id){
-            generate_node_pair_array();
-            node_pair_id = 0;
-        }
+        generate_node_pair_array();
+        node_pair_id = 0;
     });
 });
 
