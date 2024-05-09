@@ -115,7 +115,7 @@ io.on('connection', function(socket){
     /*
         * ON    - SVR_MEAS_STOP
         * FROM  - WEB
-        * TO    - 
+        * TO    - RPI
 
         - Recieve message for the server to stop the distance measurement program
     */
