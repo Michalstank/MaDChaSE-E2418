@@ -62,9 +62,8 @@ function generate_node_pair_array(){
     }
 }
 
-//Send File When Connected aka the webpage
+//Sends the main.html webpage file when connected to the server from a browser 
 app.get('/', function(req, res){
-    //Add a check to verify if it a computer
     res.sendFile('C:/Users/Michal/Desktop/MaDChaSE-main/server/main.html');
 });
 
