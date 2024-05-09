@@ -2,12 +2,9 @@ let app = require('express')();
 let http = require('http').Server(app);
 let io = require('socket.io')(http);
 
-const { timeEnd } = require('console');
 let fs = require('fs');
 
 const line_end = "\r\n";
-
-let first_node = true;
 
 function node( unique_id, network_id, mode){
     this.connection_id = 0;
@@ -39,8 +36,6 @@ let node_meas_start = false;
 let node_cnt = 0;
 
 let wait_meas           = false
-
-//Varaibles used in the node selection algorithm
 let node_pair_id        = 0
 let node_pair_array     = []
 
@@ -62,13 +57,28 @@ function generate_node_pair_array(){
     }
 }
 
-//Sends the main.html webpage file when connected to the server from a browser 
-app.get('/', function(req, res){
+//Send File When Connected aka the webpage
+app.get('/', (req, res) => {
+    //Add a check to verify if it a computer
     res.sendFile('C:/Users/Michal/Desktop/MaDChaSE-main/server/main.html');
 });
 
+app.get(`/download_csv`,(req,res)=>{
+    fs.stat('csvdata/measdata.csv', (err, stat) => {
+        //If error = null it means that the file was oppened
+        if(err == null){
+        
+            res.download("csvdata/measdata.csv")
+
+        //If error != null then it meas that such a file does not exits and needs to be created
+        } else {
+            res.status(300).send('File Does Not Exits')
+        }
+    })
+})
+
 //Whenever someone connects this gets executed
-io.on('connection', function(socket){
+io.on('connection', (socket) => {
     //Inform Console that new user connected
     console.log('A user connected');
 
@@ -120,7 +130,7 @@ io.on('connection', function(socket){
 
         - Recieve message for the server to stop the distance measurement program
     */
-    socket.on('SVR_MEAS_STOP', (data) => {
+    socket.on('SVR_MEAS_STOP', (req,res) => {
         node_meas_start = false;
         io.emit('RPI_NODE_RESET', 0);
         console.log("Measurement Stopped");
@@ -220,7 +230,7 @@ io.on('connection', function(socket){
         - On disconnect remove the disconnected node from the system
         At the same time regenerate the measurement pair array and restart the system
     */
-    socket.on('disconnect', (data) => {
+    socket.on('disconnect', () => {
         console.log('A user disconnected');
 
         let node_data = node_connection_key_map.get(socket.id)
@@ -231,13 +241,15 @@ io.on('connection', function(socket){
 
         node_connection_key_map.delete(socket.id)
 
-        generate_node_pair_array();
-        node_pair_id = 0;
+        if(node_data == current_initiator_id || node_data == current_reflector_id){
+            generate_node_pair_array();
+            node_pair_id = 0;
+        }
     });
 });
 
 /*
-    * ON    - 
+    * ON    - node_meas_start
     * FROM  - 
     * TO    - RPI
 
