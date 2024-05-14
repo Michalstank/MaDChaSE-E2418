@@ -115,7 +115,7 @@ def RPI_NODE_REFLASH(svr_data):
 	port.write("None.".encode());
 	os.system('sudo reboot');
 
-#Connect to the server, IP = TEAM LAPTOP IP when on NTNU NET
+#Connect to the server, IP = TEAM LAPTOP IP 
 sio.connect('http://192.168.2.157:3000', retry = True)
 
 first_char = True
