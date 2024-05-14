@@ -16,7 +16,7 @@ add link for NTNU, NORDIC etc.
 
 Dette section fokuserer på forklaring av hvordan nodene skal settes opp og programeres
 
-1. Last ned ned filen [LINK_BASHSCRIPT](https://www.reddit.com/), samtidig last ned både RPI Disc Imager og RPI Image [LINK]
+1. Last ned følgende filer: [Bashscript](), [Raspberry Pi Imager](https://downloads.raspberrypi.org/imager/imager_latest.exe) og [RPI Image](https://downloads.raspberrypi.com/raspios_oldstable_full_armhf/images/raspios_oldstable_full_armhf-2024-03-12/2024-03-12-raspios-bullseye-armhf-full.img.xz).
 3. 
 4. 3
 5. 3
