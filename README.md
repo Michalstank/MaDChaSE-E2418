@@ -16,11 +16,13 @@ add link for NTNU, NORDIC etc.
 
 Dette section fokuserer på forklaring av hvordan nodene skal settes opp og programeres
 
-1. b \ huh
+1. b \ ```bash
+   test
+   ```
    ee
-2. e
-3. 3
+3. e
 4. 3
+5. 3
 
 
 [//] <> -------------------------------------------------------------------------------------------------------------------------------
