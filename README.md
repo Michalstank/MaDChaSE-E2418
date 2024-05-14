@@ -13,7 +13,7 @@ Image:
 |test Test   | info |
 
 Code:
-```linux
+```js
   let test = 1
 
   cd /home/
