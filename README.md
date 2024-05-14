@@ -16,7 +16,7 @@ add link for NTNU, NORDIC etc.
 
 Dette section fokuserer på forklaring av hvordan nodene skal settes opp og programeres
 
-1. b
+1. b \n
    ee
 2. e
 3. 3
