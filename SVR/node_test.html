@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<head>
+    
+</head>
+<body>
+    <style>
+        td{
+           display: block; 
+        }
+
+        tr{
+            text-align: left;
+        }
+    </style>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const max_rand_id_val = 100_000_000
+
+        const W_Client = io()
+    
+        function node_init(id, mode){
+            this.node_unique_id = rand_data() 
+            this.node_network_id = id
+            this.node_mode = mode
+        }
+
+        function node_info(id, data){
+            this.node_id = id
+            this.node_data = data
+        }
+
+        function node_update_role(mode){
+            switch(mode){
+                
+                case 'o':
+                case 'O':
+                    document.getElementById("node_mode").innerHTML = "None"
+                    document.getElementById("node_mode").style.backgroundColor = "White"
+                break;
+                
+                case 'i':
+                case 'I':
+                    document.getElementById("node_mode").innerHTML = "Initiator"
+                    document.getElementById("node_mode").style.backgroundColor = "Green"
+                break;
+                
+                case 'r':
+                case 'R':
+                    document.getElementById("node_mode").innerHTML = "Reflector"
+                    document.getElementById("node_mode").style.backgroundColor = "Red"
+                break;
+            }
+        }
+    
+        var node_data = new node_init(0, 0, 0)
+
+        function rand_data(){
+            return Math.floor(Math.random() * max_rand_id_val)
+        }
+
+        function rand_info(max_val){
+            return Math.floor(Math.random() * max_val);
+        }
+
+        function gen_data(){
+            return `{
+                "i_local": [${rand_info(3000)},${rand_info(3000)},${rand_info(3000)}],
+                "q_local": [${rand_info(3000)},${rand_info(3000)},${rand_info(3000)}],
+                "i_remote": [${rand_info(3000)},${rand_info(3000)},${rand_info(3000)}],
+                "q_remote": [${rand_info(3000)},${rand_info(3000)},${rand_info(3000)}],
+                "hopping_sequence": [${rand_info(12)},${rand_info(12)},${rand_info(12)}],
+                "sinr_local": ${rand_info(100)},
+                "sinr_remote": ${rand_info(100)},
+                "ifft_mm": ${rand_info(50)},
+                "phase_slope_mm": ${rand_info(50)},
+                "rssi_openspace_mm": ${rand_info(50)},
+                "best_mm": ${rand_info(1000)},
+                "highprec_mm": ${rand_info(750)},
+                "link_loss_dB": ${rand_info(500)},
+                "duration_us": ${rand_info(500)},
+                "rssi_local_dB": ${rand_info(500)},
+                "rssi_remote_dB": ${rand_info(500)},
+                "txpwr_local_dB": ${rand_info(1000)},
+                "txpwr_remote_dB": ${rand_info(1000)},
+                "quality": ${rand_info(50)}}`
+        }
+
+        W_Client.on('connect', function(data){
+            W_Client.emit("SVR_NODE_INIT", node_data.node_unique_id)
+            document.getElementById("node_unique_id").innerHTML = node_data.node_unique_id
+            document.getElementById("node_status").innerHTML = "Connected"
+            document.getElementById("node_status").style.backgroundColor = "green"
+            document.getElementById("node_data").innerHTML = gen_data();
+        })
+
+        W_Client.on('disconnect', function(data){
+            document.getElementById("node_status").innerHTML = "Disconnected"
+            document.getElementById("node_status").style.backgroundColor = "red"
+        })
+
+        W_Client.on('RPI_DATA_REQUEST', function(data){
+            if(node_data.node_network_id == data.node_network_id){
+                var info = new node_info(node_data.node_network_id, document.getElementById('node_data').innerHTML)
+                document.getElementById('node_data').innerHTML = gen_data()
+                W_Client.emit('SVR_DATA_CONTENT', info)
+            }
+        })
+
+        W_Client.on('RPI_NODE_DATA', function(data){
+            if(data.node_unique_id == node_data.node_unique_id){
+                node_data.node_network_id = data.node_network_id
+                document.getElementById("node_id").innerHTML = node_data.node_network_id
+                node_data.node_mode = data.node_mode
+                
+                node_update_role(node_data.node_mode);   
+            }
+        })
+
+        W_Client.on('RPI_ROLE_UPDATE', function(data){
+
+            if(data.node_network_id == node_data.node_network_id){
+                node_data.node_mode = data.node_mode
+                node_update_role(node_data.node_mode);
+            }
+        })
+
+        W_Client.on('RPI_NODE_RESET', function(data){
+            node_data.node_mode = 'O'
+            node_update_role(node_data.node_mode);
+        })
+
+        W_Client.on('RPI_LOST', (data) => {
+            console.log("Balls")
+            W_Client.emit('SVR_RPI_ON', node_data.node_network_id)
+        })
+    </script>
+    
+    <h1> Node Overview </h1>
+
+    <table>
+        <tr>
+            <th> NodeUniqueID: </th>
+            <th id="node_unique_id"> NONE </th>
+        </tr>
+        <tr>
+            <th> NodeID: </th>
+            <th id="node_id"> N/A </th>
+        </tr>
+        <tr>
+            <th> NodeStatus: </th>
+            <th id="node_status"> N/A </th>
+        </tr>
+        <tr>
+            <th> NodeMode: </th>
+            <th id="node_mode"> N/A </th>
+        </tr>
+        <tr>
+            <th> NodeData: </th>
+            <th id="node_data"> N/A </th>
+        </tr>
+    </table>
+</body>
