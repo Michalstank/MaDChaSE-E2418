@@ -15,6 +15,9 @@ Image:
 Code:
 ```js
   let test = 1
+```
 
+```bash
   cd /home/
 ```
+
