@@ -16,11 +16,8 @@ add link for NTNU, NORDIC etc.
 
 Dette section fokuserer på forklaring av hvordan nodene skal settes opp og programeres
 
-1. b \ ```bash
-   test
-   ```
-   ee
-3. e
+1. Last ned ned filen LINK_BASHSCRIPT, samtidig last ned både RPI Disc Imager og RPI Image [LINK]
+3. 
 4. 3
 5. 3
 
