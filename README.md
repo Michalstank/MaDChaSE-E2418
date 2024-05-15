@@ -7,15 +7,16 @@ Dette er hoved repo for bacheloroppgaven skrevet for [NTNU](https://www.ntnu.no/
 DAJ SUMMARY PROJECKTY TAK NA 1 AKAPIT
 
 ## Table of contents
-1. a
-    1. a
-    2. b
-    3. c
-2. a
-    1. a
-    2. 2
-    3. 3
+1. [Oppsett](#Oppsett)
+    1. [Requirements](#Requirements)
+    2. [Server Oppsett](#Server_Oppsett)
+    3. [RPI Oppsett](#RPI_Oppsett)
+2. []()a
+    1. []()
+    2. []()
+    3. []()
 
+# Oppsett
 ## Requirements
 - En Router / Access Point med Wi-Fi
 - Mulighet for å sjekke IP av enheter koblet til Routeren / Access Point
