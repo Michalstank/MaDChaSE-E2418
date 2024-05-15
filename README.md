@@ -8,13 +8,13 @@ DAJ SUMMARY PROJECKTY TAK NA 1 AKAPIT
 
 ## Table of contents
 1. a
-  1. a
-  2. b
-  3. c
+    1. a
+    2. b
+    3. c
 2. a
-  1. a
-  2. 2
-  3. 3
+    1. a
+    2. 2
+    3. 3
 
 ## Requirements
 - En Router / Access Point med Wi-Fi
