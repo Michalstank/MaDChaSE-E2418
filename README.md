@@ -9,12 +9,11 @@ DAJ SUMMARY PROJECKTY TAK NA 1 AKAPIT
 ## Table of contents
 1. [Oppsett](#Oppsett)
     1. [Requirements](#Requirements)
-    2. [Server Oppsett](#Server_Oppsett)
-    3. [RPI Oppsett](#RPI_Oppsett)
-2. []()a
-    1. []()
-    2. []()
-    3. []()
+    2. [Server Oppsett](#Server-Oppsett)
+    3. [RPI Oppsett](#RPI-Oppsett)
+2. Bashscript
+    1. [Flagg Oversikt](#flagg-oversikt)
+    2. [Flagg Kode](#flagg-kode)
 
 # Oppsett
 ## Requirements
@@ -69,7 +68,7 @@ chmod u+x bashscript_name.sh
 sudo nano /etc/rc.local
 ```
 
-## Flag Oversikt
+## Flagg Oversikt
 
 | Flag | Funksjon |
 |------|----------|
@@ -80,6 +79,7 @@ sudo nano /etc/rc.local
 |`-r`  |          |
 |`-s`  |          |
 
+## Flagg Kode
 ### Flagg '-p' Kode
 ```
 
