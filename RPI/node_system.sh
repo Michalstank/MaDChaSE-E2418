@@ -1,5 +1,5 @@
 #!/bin/bash
-while getopts "p:j:r:d:f:s:" arg; do
+while getopts "pjrdfs" arg; do
 	case $arg in
 		#Install needed python packages
 		p) 
