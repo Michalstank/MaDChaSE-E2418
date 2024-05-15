@@ -21,14 +21,14 @@ Dette section forteller hvordan serveren skal settes opp.
 2. Unpakk filene og bestem hvilket algoritme du onsker å bruke.
 3. Start 'NodeJS Command Prompt'
 4. Start serveren ved å skrive følgende kommando:
-   ```bash
-   node server_file_name.js
-   ```
+```bash
+node server_file_name.js
+```
 5. Om det blir feil dobbelsjek at alle filene er i samme mappe.
 6. Man kan logge på brukergrensesnittet ved å ta IP til pc'en der serveren er hosted og attach port til den (IP:PORT):
-  ```
-  192.168.10.187:3000 or localhost:3000
-  ```
+```
+192.168.10.187:3000 or localhost:3000
+```
 
 ## RPI Oppsett
 
@@ -38,25 +38,25 @@ Dette section fokuserer på forklaring av hvordan nodene skal settes opp og prog
 3. Flash RPI SD kortet ved bruk av Raspberry Pi Imager, bildet nede viser anbefal konfigurasjon (Huske på å legge til Wi-Fi passord og login til nettverket du onsker at nodene skal kobles på): 
 4. Kobl opp RPI til strøm og deretter logg på Router / Access Point for å hente IP adressen til den.
 5. Send over bashscript filen ved bruk av:
-   ```bash
-   scp PATH_TO_BASHSCRIPT rpi_navn@rpi_ip:/home/rpi_navn/
-   ```
+```bash
+scp PATH_TO_BASHSCRIPT rpi_navn@rpi_ip:/home/rpi_navn/
+```
 6. Kobl til noden ved bruk av:
-   ```bash
-   shh rpi_navn@rpi_ip 
-   ```
+```bash
+shh rpi_navn@rpi_ip 
+```
 7. Gjør Bashscript til en executable:
-   ```bash
-   chmod u+x bashscript_name.sh
-   ```
+```bash
+chmod u+x bashscript_name.sh
+```
 8. Nå det er mulig å kjøre Bashscript dersom man er i samme directory som den:
-   ```bash
-   ./bashscript_name.sh
-   ```
+```bash
+./bashscript_name.sh
+```
 9. Bashscript nå kan også bli konfigurert for å kjøre ved system start, det gjøres ved å legge path til den i rc.local fila: TEST IF POSSIBLE
-   ```bash
-   sudo nano /etc/rc.local
-   ```
+```bash
+sudo nano /etc/rc.local
+```
 
 ## Flag Oversikt
 
