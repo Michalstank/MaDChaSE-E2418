@@ -19,7 +19,7 @@ plt.axvline(median,color=color, label = 'Median')
 
 #Captions 
 plt.title('Node 1 til Node 2:')
-plt.xlabel("Meter")
+plt.xlabel("millimeter")
 plt.ylabel("Antall målinger")
 
 #Plot layout
