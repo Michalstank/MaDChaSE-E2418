@@ -18,7 +18,7 @@ color = '#FF5349'
 plt.axvline(median,color=color, label = 'Median')
 
 #Captions 
-plt.title('Node 1 til Node 2:')
+plt.title('Node x til Node y:')
 plt.xlabel("millimeter")
 plt.ylabel("Antall målinger")
 
