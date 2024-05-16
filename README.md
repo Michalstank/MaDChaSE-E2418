@@ -13,16 +13,15 @@ Dette er repositoriet for bacheloroppgaven "MaDChaSE", i forbindelse med studier
 
 # Hardware Requirements 
 For å sette opp systemet kreves det følgende hardware:
+- En Router / Access Point med Wi-Fi
 - nRF52833 Dk.
 - Raspberry Pi 3B+ (Eller tilsvarende modell som støtter---)
 - Micro SD kort
 ![image](https://github.com/shakerhoudini/VHDL/blob/9421bcb0c60f7aab8808be60aede336b4b58db95/blok_diag.png)
 
 
-## Requirements
-- En Router / Access Point med Wi-Fi
+## Software Requirements
 - Mulighet for å sjekke IP av enheter koblet til Routeren / Access Point
-- Minst 2 Noder (RPI 3B+ + nRF52833 Dk.)
 - Minst NodeJS v18.13.0
 - Node pakkene: socketio, express.
 
