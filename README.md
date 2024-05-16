@@ -18,7 +18,7 @@ Dette er repositoriet for bacheloroppgaven "MaDChaSE", i forbindelse med studier
 ## Requirements
 - En Router / Access Point med Wi-Fi
 - Mulighet for å sjekke IP av enheter koblet til Routeren / Access Point
-- Minst 2 Noder (RPI + nRF52833)
+- Minst 2 Noder (RPI 3B+ + nRF52833 Dk.)
 - Minst NodeJS v18.13.0
 - Node pakkene: socketio, express.
 
