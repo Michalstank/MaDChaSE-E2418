@@ -36,7 +36,7 @@ For å sette opp systemet kreves det følgende hardware:
 # Guide for oppsett
 
 ## Hardware oppsett
-
+[3D.print](https://github.com/Michalstank/MaDChaSE-E2418/tree/main/SVR)
 ![image](https://github.com/shakerhoudini/VHDL/blob/395771d89b2dca0d43f5f726d94a6666bfbc4f7c/Nodes.png)
 
 ## Server Oppsett
