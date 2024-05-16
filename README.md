@@ -20,7 +20,7 @@ Dette er repositoriet for bacheloroppgaven "MaDChaSE", i forbindelse med studier
 Det utviklede systemet baserer seg på noder i form av nRF52833 Dk. og RPI 3B+. nRF-enheten gjennomfører kanalmålinger, mens RPI 3B+ står for nettverkskommunikasjon og distribuerer fastvare nødvendig for målingene. En server brukes som mellomleddet mellom nodene og brukergrensesnittet. Serveren kommuniserer med nodene over et WiFi-nettverk og står for kanalmålingsorkestrering og samhandling. Brukergrensesnittet er i form av en nettside. 
 ![image](https://github.com/shakerhoudini/VHDL/blob/9421bcb0c60f7aab8808be60aede336b4b58db95/blok_diag.png)
 
-# Hardware Requirements 
+## Hardware Requirements
 For å sette opp systemet kreves det følgende hardware:
 - En Router / Access Point med Wi-Fi
 - nRF52833 Dk.
@@ -28,11 +28,12 @@ For å sette opp systemet kreves det følgende hardware:
 - Micro SD kort
 
 
-
 ## Software Requirements
 - Mulighet for å sjekke IP av enheter koblet til Routeren / Access Point
 - Minst NodeJS v18.13.0
 - Node pakkene: socketio, express.
+
+# Guide for oppsett
 
 ## Server Oppsett
 
