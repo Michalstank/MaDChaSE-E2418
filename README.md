@@ -12,6 +12,10 @@ Dette er repositoriet for bacheloroppgaven "MaDChaSE", i forbindelse med studier
     2. [Flagg Kode](#flagg-kode)
 
 # Oppsett
+'
+![image](https://github.com/shakerhoudini/VHDL/blob/9421bcb0c60f7aab8808be60aede336b4b58db95/blok_diag.png)
+
+
 ## Requirements
 - En Router / Access Point med Wi-Fi
 - Mulighet for å sjekke IP av enheter koblet til Routeren / Access Point
@@ -179,6 +183,7 @@ line
 Image:
 
 ![image](https://github.com/Michalstank/MaDChaSE-E2418/assets/31627253/acef1b54-d0af-4a08-932f-2081fa88ebae)
+
 
 | table test | info |
 |------------|------|
