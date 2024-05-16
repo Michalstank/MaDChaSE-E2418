@@ -1,4 +1,4 @@
-# MaDChaSE - Massive Distributed Channel Sounding Equipment
+# Massive Distributed Channel Sounding Equipment (MaDChaSE)
 
 Dette er repositoriet for bacheloroppgaven "MaDChaSE", i forbindelse med studieretningen elektronikk og sensorsystemer ved [NTNU](https://www.ntnu.no/). Med støtte fra [Nordic Semiconductors](https://www.nordicsemi.com/), ble prosjektet gjennomført for å utvikle et konseptbevis for er system som muliggjør massiv distribuering av noder i stand til å gjennomføre kanalmåling. Oppgaven ble avgrenset til håndteringen av hundrevis av noder på et nettverk. Dette inkluderte arbeid som prototyping av noder, utviklingen av verktøy for distribuering av fastvare, oppkobling av nye enheter til et WiFi-nettverk, kanalmålingsorkestrering og datainnsamling. 
 
