@@ -4,7 +4,7 @@ Linken til github pga det skal være en del av hoved reporten: https://github.co
 
 Dette er hoved repo for bacheloroppgaven skrevet for [NTNU](https://www.ntnu.no/) i sammearbeid med [Nordic Semiconductors](https://www.nordicsemi.com/).
 
-DAJ SUMMARY PROJECKTY TAK NA 1 AKAPIT
+Med støtte fra Nordic Semiconductor, ble dette prosjektet gjennomført for å utvikle et konseptbevis for er system som muliggjør massiv distribuering av noder i stand til å gjennomføre kanalmåling. Oppgaven ble avgrenset til håndteringen av hundrevis av noder på et nettverk. Dette inkluderte oppgaver som prototyping av noder, utviklingen av verktøy for distribuering av fastvare, oppkobling av nye enheter til et WiFi-nettverk, kanalmålingsorkestrering og datainnsamling. 
 
 ## Table of contents
 1. [Oppsett](#Oppsett)
