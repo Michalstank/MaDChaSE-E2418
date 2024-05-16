@@ -1,4 +1,4 @@
-# MaDChaSE
+# MaDChaSE - Massive Distributed Channel Sounding Equipment
 
 Linken til github pga det skal være en del av hoved reporten: https://github.com/Michalstank/MaDChaSE-E2418
 
