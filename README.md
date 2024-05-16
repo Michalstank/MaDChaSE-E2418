@@ -35,6 +35,10 @@ For å sette opp systemet kreves det følgende hardware:
 
 # Guide for oppsett
 
+## Hardware oppsett
+
+![image](https://github.com/shakerhoudini/VHDL/blob/395771d89b2dca0d43f5f726d94a6666bfbc4f7c/Nodes.png)
+
 ## Server Oppsett
 
 Denne delen har som formål å vise de nødvendige stegene for å sette opp serveren. 
