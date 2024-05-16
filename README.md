@@ -1,6 +1,6 @@
 # Massive Distributed Channel Sounding Equipment 
 
-Dette er repositoriet for bacheloroppgaven "MaDChaSE", i forbindelse med studieretningen elektronikk og sensorsystemer ved [NTNU](https://www.ntnu.no/). Med støtte fra [Nordic Semiconductors](https://www.nordicsemi.com/), ble prosjektet gjennomført for å utvikle et konseptbevis for et system som muliggjør massiv distribuering av noder i stand til å gjennomføre [kanalmåling](https://www.bluetooth.com/specifications/specs/channel-sounding-cr-pr/). Oppgaven ble avgrenset til håndteringen av hundrevis av noder på et nettverk. Dette inkluderer arbeid som: 
+Dette er repositoriet for bacheloroppgaven "MaDChaSE", i forbindelse med studieretningen elektronikk og sensorsystemer ved [NTNU](https://www.ntnu.no/). Med støtte fra [Nordic Semiconductor](https://www.nordicsemi.com/), ble prosjektet gjennomført for å utvikle et konseptbevis for et system som muliggjør massiv distribuering av noder i stand til å gjennomføre [kanalmåling](https://www.bluetooth.com/specifications/specs/channel-sounding-cr-pr/). Oppgaven ble avgrenset til håndteringen av hundrevis av noder på et nettverk. Dette inkluderer arbeid som: 
 
 - Prototyping av noder.
 - Distribuering av fastvare. 
