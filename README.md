@@ -12,8 +12,10 @@ Dette er repositoriet for bacheloroppgaven "MaDChaSE", i forbindelse med studier
     2. [Flagg Kode](#flagg-kode)
 
 # Hardware Requirements 
+For å sette opp systemet kreves det følgende hardware:
 - nRF52833 Dk.
 - Raspberry Pi 3B+ (Eller tilsvarende modell som støtter---)
+- Micro SD kort
 ![image](https://github.com/shakerhoudini/VHDL/blob/9421bcb0c60f7aab8808be60aede336b4b58db95/blok_diag.png)
 
 
