@@ -2,9 +2,9 @@
 
 Linken til github pga det skal være en del av hoved reporten: https://github.com/Michalstank/MaDChaSE-E2418
 
-Dette er repositoriet for bacheloroppgaven "MaDChaSE", skrevet for [NTNU](https://www.ntnu.no/) i sammearbeid med [Nordic Semiconductors](https://www.nordicsemi.com/).
+Dette er repositoriet for bacheloroppgaven "MaDChaSE", i forbindelse med studieretningen elektronikk og sensorsystemer ved [NTNU](https://www.ntnu.no/).
 
-Med støtte fra Nordic Semiconductor, ble dette prosjektet gjennomført for å utvikle et konseptbevis for er system som muliggjør massiv distribuering av noder i stand til å gjennomføre kanalmåling. Oppgaven ble avgrenset til håndteringen av hundrevis av noder på et nettverk. Dette inkluderte arbeid som prototyping av noder, utviklingen av verktøy for distribuering av fastvare, oppkobling av nye enheter til et WiFi-nettverk, kanalmålingsorkestrering og datainnsamling. 
+Med støtte fra [Nordic Semiconductors](https://www.nordicsemi.com/), ble dette prosjektet gjennomført for å utvikle et konseptbevis for er system som muliggjør massiv distribuering av noder i stand til å gjennomføre kanalmåling. Oppgaven ble avgrenset til håndteringen av hundrevis av noder på et nettverk. Dette inkluderte arbeid som prototyping av noder, utviklingen av verktøy for distribuering av fastvare, oppkobling av nye enheter til et WiFi-nettverk, kanalmålingsorkestrering og datainnsamling. 
 
 ## Table of contents
 1. [Oppsett](#Oppsett)
