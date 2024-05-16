@@ -33,7 +33,7 @@ For å sette opp systemet kreves det følgende hardware:
 
 ## Server Oppsett
 
-Dette section forteller hvordan serveren skal settes opp.
+Denne delen har som formål å vise de nødvendige stegene for å sette opp serveren. 
 
 1. Last ned [Server Files](https://github.com/Michalstank/MaDChaSE-E2418/tree/main/SVR).
 2. Unpakk filene og bestem hvilket algoritme du onsker å bruke.
