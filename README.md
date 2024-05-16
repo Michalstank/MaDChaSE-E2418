@@ -11,7 +11,9 @@ Dette er repositoriet for bacheloroppgaven "MaDChaSE", i forbindelse med studier
     1. [Flagg Oversikt](#flagg-oversikt)
     2. [Flagg Kode](#flagg-kode)
 
-# Oppsett
+# Hardware Requirements 
+- nRF52833 Dk.
+- Raspberry Pi 3B+ (Eller tilsvarende modell som støtter---)
 ![image](https://github.com/shakerhoudini/VHDL/blob/9421bcb0c60f7aab8808be60aede336b4b58db95/blok_diag.png)
 
 
