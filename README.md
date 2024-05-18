@@ -54,7 +54,7 @@ node server_file_name.js
 ```
 5. Om det blir feil dobbelsjek at alle filene er i samme mappe.
 6. Man kan logge på brukergrensesnittet ved å ta IP til pc'en der serveren er hosted og attach port til den (IP:PORT), det skal skrives inn i nettleseren:
-```
+```bash
 192.168.10.187:3000 or localhost:3000
 ```
 7. Edit client.py fil for å endre tilkoblings IP'en. Det finnes på linje 119:
