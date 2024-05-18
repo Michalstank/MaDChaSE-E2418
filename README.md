@@ -67,9 +67,11 @@ sio.connect('http://IP:PORT', retry = True), example: sio.connect('http://192.16
 Dette section fokuserer på forklaring av hvordan nodene skal settes opp og programeres
 
 1. Last ned følgende filer: [Bashscript](), [Raspberry Pi Imager](https://downloads.raspberrypi.org/imager/imager_latest.exe) og [RPI Image](https://downloads.raspberrypi.com/raspios_oldstable_full_armhf/images/raspios_oldstable_full_armhf-2024-03-12/2024-03-12-raspios-bullseye-armhf-full.img.xz).
-3. Flash RPI SD kortet ved bruk av Raspberry Pi Imager, bildet nede viser anbefal konfigurasjon (Huske på å legge til Wi-Fi passord og login til nettverket du onsker at nodene skal kobles på): 
-4. Kobl opp RPI til strøm og deretter logg på Router / Access Point for å hente IP adressen til den.
-5. Send over bashscript filen ved bruk av:
+3. Flash RPI SD kortet ved bruk av Raspberry Pi Imager, bildet nede viser anbefal konfigurasjon (Huske på å legge til Wi-Fi passord og login til nettverket du onsker at nodene skal kobles på):
+   ![image](https://github.com/Michalstank/MaDChaSE-E2418/assets/31627253/1cca488a-f8cd-445a-be60-3683ddc801fe)
+
+5. Kobl opp RPI til strøm og deretter logg på Router / Access Point for å hente IP adressen til den.
+6. Send over bashscript filen ved bruk av:
 ```bash
 scp PATH_TO_BASHSCRIPT rpi_navn@rpi_ip:/home/rpi_navn/
 ```
