@@ -53,7 +53,7 @@ Denne delen har som formål å vise de nødvendige stegene for å sette opp serv
 node server_file_name.js
 ```
 5. Om det blir feil dobbelsjek at alle filene er i samme mappe.
-6. Man kan logge på brukergrensesnittet ved å ta IP til pc'en der serveren er hosted og attach port til den (IP:PORT):
+6. Man kan logge på brukergrensesnittet ved å ta IP til pc'en der serveren er hosted og attach port til den (IP:PORT), det skal skrives inn i nettleseren:
 ```
 192.168.10.187:3000 or localhost:3000
 ```
