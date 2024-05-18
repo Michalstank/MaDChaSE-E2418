@@ -57,6 +57,10 @@ node server_file_name.js
 ```
 192.168.10.187:3000 or localhost:3000
 ```
+7. Edit client.py fil for å endre tilkoblings IP'en. Det finnes på linje 119:
+```python
+sio.connect('http://IP:PORT', retry = True), example: sio.connect('http://192.168.2.12:3000', retry = True) 
+```
 
 ## RPI Oppsett
 
