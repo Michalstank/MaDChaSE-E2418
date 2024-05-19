@@ -124,6 +124,11 @@
       height: 1px;
       background-color: black;
     }
+
+    a{
+      width: 100%;
+      background-color: white;
+    }
   </style>
   <title>Node Network Overview</title>
 </head>
@@ -135,6 +140,15 @@
     //Main const variable which is used to establish connection with the server
     const WEB_CLIENT = io();
 
+    function node_restart(data){
+      WEB_CLIENT.emit("SVR_NODE_RESTART", data)
+    }
+
+    function node_msg(data){
+      let inp_field = document.getElementById(`inp_${data}`)
+      WEB_CLIENT.emit("SVR_NODE_MSG",[data,inp_field.value])
+    }
+
     //Function used to add new nodes to the node display
     function node_add_row(data){
       //Find the element of the webpage used to display nodes and save it into a variable
@@ -145,11 +159,17 @@
       <li class="table-row" id="nui_${data.node_unique_id}">
         <div class="col col-1" id="nsb_${data.node_network_id}"> <input type="checkbox" id="ncb_${data.node_network_id}" name="ncb_${data.node_network_id}"></div>
         <div class="col col-2" id="nni_${data.node_network_id}"> ${data.node_network_id} </div>
-        <div class="col col-3" > <button id="rst_btn_${data.node_network_id}" class="btn danger"> Restart </button></div>
+        <div class="col col-3" > <button id="rst_btn_${data.node_network_id}" onclick="node_restart('${data.node_network_id}')" class="btn danger"> Restart </button></div>
         <div class="col col-4" id="ncs_${data.node_network_id}"> Connected </div>
-        <div class="col col-5" id="nsc_${data.node_network_id}"> <td><input type="text" placeholder="Command" id="myInput"> </td></div>
-        <div class="col col-6" id="ncb_${data.node_network_id}"> <button class="btn danger">Send</button></div>
+        <div class="col col-5" id="nsc_${data.node_network_id}"> <td><input type="text" placeholder="Command" id="inp_${data.node_network_id}"> </td></div>
+        <div class="col col-6" id="ncb_${data.node_network_id}"> <button onclick="node_msg('${data.node_network_id}')" class="btn danger">Send</button></div>
       </li>`
+    }
+
+    document.onkeypress = (e) => {
+      if(e.key == 's'){
+        WEB_CLIENT.emit('SVR_WEB_MODE_CHANGE', 0);
+      }
     }
 
     //###############################################
@@ -263,7 +283,13 @@
     <p></p>
     <button class="code_download" onclick="node_stop_meas()"> Stop Measurement </button>
     <p></p>
-    <a class="code_download" href="http://localhost:3000/download_csv" download> Balls? </a>
+    <button class="code_download" id="download_button"> Download CSV File </button>
+    <!--<a class="code_download" href="http://localhost:3000/download_csv" download> Balls? </a> -->
+    <script>
+    document.getElementById('download_button').addEventListener('click', () => {
+      window.location = 'http://localhost:3000/download_csv';
+    })
+    </script>
   </div>
 
     <!-- Main Node List Display -->
