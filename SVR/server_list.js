@@ -13,12 +13,6 @@ function node( unique_id, network_id, mode){
     this.node_mode = mode
 }
 
-function node_data(random_id, new_id, new_mode){
-    this.node_unique_id = random_id
-    this.node_network_id = `RPI_NODE_${new_id}`
-    this.node_mode = new_mode
-}
-
 //Port at which the server will be hosted
 const server_port = 3000
 
@@ -38,6 +32,8 @@ let node_cnt = 0;
 let wait_meas           = false
 let node_pair_id        = 0
 let node_pair_array     = []
+
+let webside_mode = false;
 
 /*
     Uses the map of connected nodes and generates all avaible combinations of nodes
@@ -59,17 +55,19 @@ function generate_node_pair_array(){
 
 //Send File When Connected aka the webpage
 app.get('/', (req, res) => {
-    //Add a check to verify if it a computer
-    res.sendFile('C:/Users/Michal/Desktop/MaDChaSE-main/server/main.html');
+    if(webside_mode == false){
+        res.sendFile('C:/Users/Michal/Desktop/MaDChaSE-main/server/main.html');
+    } else {
+        res.sendFile('C:/Users/Michal/Desktop/MaDChaSE-main/server/node_test.html');
+    }
+    
 });
 
 app.get(`/download_csv`,(req,res)=>{
     fs.stat('csvdata/measdata.csv', (err, stat) => {
         //If error = null it means that the file was oppened
         if(err == null){
-        
             res.download("csvdata/measdata.csv")
-
         //If error != null then it meas that such a file does not exits and needs to be created
         } else {
             res.status(300).send('File Does Not Exits')
@@ -85,6 +83,10 @@ io.on('connection', (socket) => {
     //Increase count of nodes added to the server
     node_cnt++;
 
+    socket.on('SVR_WEB_MODE_CHANGE', ()=>{
+        webside_mode = !webside_mode;
+    })
+
     /*
         * ON    - SVR_LIST_REQUEST
         * FROM  - WEB
@@ -94,6 +96,22 @@ io.on('connection', (socket) => {
     */
     socket.on('SVR_LIST_REQUEST', (data) => {
         io.emit('WEB_LIST_RECIEVE', Array.from(node_list_map.values()));
+    })
+
+    /*
+        * ON    - SVR_NODE_RESTART
+        * FROM  - WEB
+        * TO    - RPI
+
+        - Transmit message to a node causing them to restart henceforth redownload client and hexfile -> flash nrf
+    */
+    socket.on('SVR_NODE_RESTART',(data) => {
+        io.emit('SVR_NODE_RESTART', data);
+        console.log(`Restarting: ${data}`);
+    })
+
+    socket.on('SVR_NODE_MSG', (data) => {
+        console.log(`MSG For Node: ${data}`);
     })
 
     /*
@@ -150,15 +168,15 @@ io.on('connection', (socket) => {
         //Initialize Node if it was not detected
         console.log("New Node Initialization")
         
-        //Send New data to the node
-        io.emit('RPI_NODE_DATA', new node_data(data, node_cnt, 'O'))
-        io.emit('WEB_NODE_DATA', new node_data(data, node_cnt, 'O'))
-
         let new_node = new node(data,`RPI_NODE_${node_cnt}`, 'O')
         new_node.connection_id      = socket.id;
 
-        node_connection_key_map.set ( socket.id,                 new_node.node_network_id);
-        node_list_map.set           ( new_node.node_network_id,  new_node);   
+        //Send New data to the node
+        io.emit('RPI_NODE_DATA', new_node)
+        io.emit('WEB_NODE_DATA', new_node)
+
+        node_connection_key_map.set ( socket.id                 , new_node.node_network_id);
+        node_list_map.set           ( new_node.node_network_id  , new_node);   
         
         if(node_pair_array.length > 1){
             generate_node_pair_array();
@@ -177,9 +195,9 @@ io.on('connection', (socket) => {
         const time = new Date()
 
         let json_data = JSON.parse(data)
-
+        
         if(json_data['quality'] == 0){
-            node_pair_id+=1
+            node_pair_id = node_pair_id + 1;
             wait_meas = false
         }
 
@@ -195,10 +213,11 @@ io.on('connection', (socket) => {
 
         let csvContent = csv_line_start + ','
 
-        //TODO: REWORK TO SINGLE LINE
         for(let type in json_data){
             csvContent += `${String(json_data[type]).replace(/,/g,';')}` + ','
         }
+
+
 
         csvContent += line_end
 
@@ -277,7 +296,7 @@ setInterval(() => {
         current_initiator_id = node_pair[0]
         current_reflector_id = node_pair[1]
     }
-}, 2000)
+}, 100)
 
 /*
     * ON    - 
