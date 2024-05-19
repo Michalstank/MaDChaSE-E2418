@@ -34,7 +34,10 @@ For å sette opp systemet kreves det følgende hardware:
 - Minst versjon av NodeJS v18.13.0
 - Node pakkene: socketio, express.
 ## nRF Libraries
--
+- <zephyr/kernel.h>
+- <zephyr/gpio.h>
+- <zephyr/uart.h>
+- [libnrf_dm.a](https://github.com/nrfconnect/sdk-nrfxlib/blob/main/nrf_dm/lib/nrf52833/hard-float/libnrf_dm.a)
 
 # Guide for oppsett
 
