@@ -7,10 +7,10 @@ let fs = require('fs');
 const line_end = "\r\n";
 
 function node( unique_id, network_id, mode){
-    this.connection_id = 0;
-    this.node_unique_id = unique_id
-    this.node_network_id = network_id
-    this.node_mode = mode
+    this.connection_id = 0;                 // Socket.id
+    this.node_unique_id = unique_id         // RAND NUM
+    this.node_network_id = network_id       // RPI_NODE_n
+    this.node_mode = mode                   // NONE | RELF | INTI
 }
 
 //Port at which the server will be hosted
@@ -19,9 +19,9 @@ const server_port = 3000
 let current_initiator_id;
 let current_reflector_id;
 
-//"Lists" of connected nodes to the networks
-let node_connection_key_map = new Map();
-let node_list_map           = new Map();
+//"Lists" of connected nodes to the networks       Key              Value
+let node_connection_key_map = new Map();    // Socket.id       | node_network_id
+let node_list_map           = new Map();    // node_network_id | node
 
 //boolean to keep track if measurment is allowed
 let node_meas_start = false;
@@ -32,8 +32,6 @@ let node_cnt = 0;
 let wait_meas           = false
 let node_pair_id        = 0
 let node_pair_array     = []
-
-let webside_mode = false;
 
 /*
     Uses the map of connected nodes and generates all avaible combinations of nodes
@@ -55,12 +53,8 @@ function generate_node_pair_array(){
 
 //Send File When Connected aka the webpage
 app.get('/', (req, res) => {
-    if(webside_mode == false){
-        res.sendFile('C:/Users/Michal/Desktop/MaDChaSE-main/server/main.html');
-    } else {
-        res.sendFile('C:/Users/Michal/Desktop/MaDChaSE-main/server/node_test.html');
-    }
-    
+    //Add a check to verify if it a computer
+    res.sendFile('C:/Users/micha/Desktop/main.html');
 });
 
 app.get(`/download_csv`,(req,res)=>{
@@ -83,10 +77,6 @@ io.on('connection', (socket) => {
     //Increase count of nodes added to the server
     node_cnt++;
 
-    socket.on('SVR_WEB_MODE_CHANGE', ()=>{
-        webside_mode = !webside_mode;
-    })
-
     /*
         * ON    - SVR_LIST_REQUEST
         * FROM  - WEB
@@ -94,24 +84,8 @@ io.on('connection', (socket) => {
 
         - Transmit Entire Nodelist of connected nodes
     */
-    socket.on('SVR_LIST_REQUEST', (data) => {
+    socket.on('SVR_LIST_REQUEST', () => {
         io.emit('WEB_LIST_RECIEVE', Array.from(node_list_map.values()));
-    })
-
-    /*
-        * ON    - SVR_NODE_RESTART
-        * FROM  - WEB
-        * TO    - RPI
-
-        - Transmit message to a node causing them to restart henceforth redownload client and hexfile -> flash nrf
-    */
-    socket.on('SVR_NODE_RESTART',(data) => {
-        io.emit('SVR_NODE_RESTART', data);
-        console.log(`Restarting: ${data}`);
-    })
-
-    socket.on('SVR_NODE_MSG', (data) => {
-        console.log(`MSG For Node: ${data}`);
     })
 
     /*
@@ -121,7 +95,7 @@ io.on('connection', (socket) => {
 
         - Transmit message for nodes causing them to restart and reflash the nrf
     */
-    socket.on('SVR_NODE_REFLASH', (data) => {
+    socket.on('SVR_NODE_REFLASH', () => {
         io.emit('RPI_NODE_REFLASH', 0);
         node_meas_start = false;
         console.log("Resetting the network");
@@ -134,7 +108,7 @@ io.on('connection', (socket) => {
 
         - Recieve message for the server to start the distance measurement program
     */
-    socket.on('SVR_MEAS_START', (data) => {
+    socket.on('SVR_MEAS_START', () => {
         node_meas_start = true;
         console.log("Measurement Started")
         generate_node_pair_array();
@@ -148,7 +122,7 @@ io.on('connection', (socket) => {
 
         - Recieve message for the server to stop the distance measurement program
     */
-    socket.on('SVR_MEAS_STOP', (req,res) => {
+    socket.on('SVR_MEAS_STOP', () => {
         node_meas_start = false;
         io.emit('RPI_NODE_RESET', 0);
         console.log("Measurement Stopped");
@@ -157,17 +131,16 @@ io.on('connection', (socket) => {
     /*
         * ON    - SVR_NODE_INIT
         * FROM  - RPI
-        * TO    - RPI
-
-        * data - node_unique_id
+        * TO    - RPI | WEB
 
         - Handle Node connection to the node network
         ! Doesn't Trigger on webpage connection
     */
-    socket.on("SVR_NODE_INIT", function(data){
+
+    socket.on("SVR_NODE_INIT", (data) => {
         //Initialize Node if it was not detected
         console.log("New Node Initialization")
-        
+
         let new_node = new node(data,`RPI_NODE_${node_cnt}`, 'O')
         new_node.connection_id      = socket.id;
 
@@ -175,8 +148,8 @@ io.on('connection', (socket) => {
         io.emit('RPI_NODE_DATA', new_node)
         io.emit('WEB_NODE_DATA', new_node)
 
-        node_connection_key_map.set ( socket.id                 , new_node.node_network_id);
-        node_list_map.set           ( new_node.node_network_id  , new_node);   
+        node_connection_key_map.set ( socket.id,                 new_node.node_network_id);
+        node_list_map.set           ( new_node.node_network_id,  new_node);   
         
         if(node_pair_array.length > 1){
             generate_node_pair_array();
@@ -191,13 +164,13 @@ io.on('connection', (socket) => {
 
         - Processes JSON data send from the rpi to the server
     */
-    socket.on('SVR_DATA_CONTENT',function(data){
+    socket.on('SVR_DATA_CONTENT', (data) => {
         const time = new Date()
 
         let json_data = JSON.parse(data)
-        
+
         if(json_data['quality'] == 0){
-            node_pair_id = node_pair_id + 1;
+            node_pair_id+=1
             wait_meas = false
         }
 
@@ -213,11 +186,10 @@ io.on('connection', (socket) => {
 
         let csvContent = csv_line_start + ','
 
+        //TODO: REWORK TO SINGLE LINE
         for(let type in json_data){
             csvContent += `${String(json_data[type]).replace(/,/g,';')}` + ','
         }
-
-
 
         csvContent += line_end
 
@@ -260,10 +232,8 @@ io.on('connection', (socket) => {
 
         node_connection_key_map.delete(socket.id)
 
-        if(node_data == current_initiator_id || node_data == current_reflector_id){
-            generate_node_pair_array();
-            node_pair_id = 0;
-        }
+        generate_node_pair_array();
+        node_pair_id = 0;
     });
 });
 
@@ -296,7 +266,7 @@ setInterval(() => {
         current_initiator_id = node_pair[0]
         current_reflector_id = node_pair[1]
     }
-}, 100)
+}, 2000)
 
 /*
     * ON    - 
@@ -313,6 +283,6 @@ setInterval(() => {
 }, 1000);
 
 // Start the Server at port 3000
-http.listen(server_port, function(){
+http.listen(server_port, () => {
    console.log('listening on port: ' + server_port);
 });
