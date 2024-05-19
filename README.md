@@ -1,13 +1,13 @@
 # Massive Distributed Channel Sounding Equipment 
 
-Linken til github pga det skal være en del av hoved reporten: https://github.com/Michalstank/MaDChaSE-E2418.
-
 Dette er repositoriet for bacheloroppgaven "MaDChaSE", i forbindelse med studieretningen elektronikk og sensorsystemer ved [NTNU](https://www.ntnu.no/). Med støtte fra [Nordic Semiconductor](https://www.nordicsemi.com/), ble prosjektet gjennomført for å utvikle et konseptbevis for et system som muliggjør massiv distribuering av noder i stand til å gjennomføre [kanalmåling](https://www.bluetooth.com/specifications/specs/channel-sounding-cr-pr/). Oppgaven ble avgrenset til håndteringen av hundrevis av noder på et nettverk. Dette inkluderer arbeid som: 
 
 - Prototyping av noder.
 - Distribuering av fastvare. 
 - Verktøy for oppkobling av nye noder til et WiFi-nettverk.
 - Kanalmålingsorkestrering og datainnsamling. 
+
+Alle relevante filer inkludert dette databladet finnes under følgende link: https://github.com/Michalstank/MaDChaSE-E2418
 
 ## Table of contents
 1. [Oppsett](#Oppsett)
