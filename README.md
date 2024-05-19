@@ -93,9 +93,14 @@ chmod u+x bashscript_name.sh
 ```bash
 ./bashscript_name.sh
 ```
-9. Bashscript nå kan også bli konfigurert for å kjøre ved system start, det gjøres ved å legge path til den i rc.local fila: TEST IF POSSIBLE
+9. Bashscript nå kan også bli konfigurert for å kjøre ved system start, det gjøres ved å legge path til den i rc.local fila:
 ```bash
 sudo nano /etc/rc.local
+```
+10. Ved å følge oppsettet den skal ligne på dette her:
+```bash
+#Kommentar og default kode over...
+./home/rpi_navn/bashscript_navn.sh
 ```
 
 ## Flagg Oversikt
