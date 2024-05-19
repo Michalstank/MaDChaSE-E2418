@@ -29,7 +29,7 @@ For å sette opp systemet kreves det følgende hardware:
 - nRF52833 Dk.
 - Raspberry Pi 3B+ (Eller tilsvarende modell som støtter Rasbian v11.9)
 - Micro SD kort
-- Power Supply kabel
+- Power Supply for RPI 
 - USB-A til Micro-USB-B kabel
 
 ## Software Requirements
