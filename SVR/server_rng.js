@@ -29,28 +29,6 @@ let node_meas_start = false;
 //Amount of nodes that were processed and added to the server
 let node_cnt = 0;
 
-let wait_meas           = false
-let node_pair_id        = 0
-let node_pair_array     = []
-
-/*
-    Uses the map of connected nodes and generates all avaible combinations of nodes
-
-    Resets the primary variables used to keep track of them
-*/
-function generate_node_pair_array(){
-    node_pair_array = [];
-    node_pair_id = 0;
-
-    for(let key1 of Array.from(node_list_map.keys())){
-        for(let key2 of Array.from(node_list_map.keys())){
-            if(key1 != key2){
-                node_pair_array.push([key1, key2])
-            }
-        }
-    }
-}
-
 //Send File When Connected aka the webpage
 app.get('/', (req, res) => {
     //Add a check to verify if it a computer
@@ -111,8 +89,6 @@ io.on('connection', (socket) => {
     socket.on('SVR_MEAS_START', () => {
         node_meas_start = true;
         console.log("Measurement Started")
-        generate_node_pair_array();
-        console.log(node_pair_array);
     })
 
     /*
@@ -149,12 +125,7 @@ io.on('connection', (socket) => {
         io.emit('WEB_NODE_DATA', new_node)
 
         node_connection_key_map.set ( socket.id,                 new_node.node_network_id);
-        node_list_map.set           ( new_node.node_network_id,  new_node);   
-        
-        if(node_pair_array.length > 1){
-            generate_node_pair_array();
-        }
-        
+        node_list_map.set           ( new_node.node_network_id,  new_node);           
     })
 
     /*
@@ -186,7 +157,6 @@ io.on('connection', (socket) => {
 
         let csvContent = csv_line_start + ','
 
-        //TODO: REWORK TO SINGLE LINE
         for(let type in json_data){
             csvContent += `${String(json_data[type]).replace(/,/g,';')}` + ','
         }
@@ -219,9 +189,8 @@ io.on('connection', (socket) => {
         * TO    - WEB
 
         - On disconnect remove the disconnected node from the system
-        At the same time regenerate the measurement pair array and restart the system
     */
-    socket.on('disconnect', () => {
+    socket.on('disconnect', (data) => {
         console.log('A user disconnected');
 
         let node_data = node_connection_key_map.get(socket.id)
@@ -231,9 +200,6 @@ io.on('connection', (socket) => {
         node_list_map.delete(node_data);
 
         node_connection_key_map.delete(socket.id)
-
-        generate_node_pair_array();
-        node_pair_id = 0;
     });
 });
 
@@ -245,28 +211,36 @@ io.on('connection', (socket) => {
     - Start the process of selecting Initiator and reflector
 */
 setInterval(() => {
-    if(node_meas_start == true && node_pair_array.length > 1 && wait_meas == false){
-        io.emit('RPI_NODE_RESET',0)
+    if(node_meas_start == true){
+        let node_count = node_list_map.size;
+        let node_keys = Array.from(node_list_map.keys())
+
+        if(node_count > 1){
+            let id_1 = node_keys[Math.floor(Math.random() * node_count)]
+            let id_2 = node_keys[Math.floor(Math.random() * node_count)]
         
-        if(current_initiator_id != undefined && current_reflector_id != undefined){
-            node_list_map.get(current_initiator_id).node_mode = 'O'
-            node_list_map.get(current_reflector_id).node_mode = 'O'
+            if(id_1 != id_2){
+                if(current_initiator_id != undefined){
+                    node_list_map.get(current_initiator_id).node_mode = 'O'
+                    node_list_map.get(current_reflector_id).node_mode = 'O'
+                }
+                
+                // RESET ALL NODES
+                io.emit('RPI_NODE_RESET', 0)
+
+                // ID_1 = Initiator, ID_2 = Reflector
+                node_list_map.get(id_1).node_mode = 'I'
+                node_list_map.get(id_2).node_mode = 'R'
+                
+                io.emit('RPI_ROLE_UPDATE', node_list_map.get(id_1))
+                io.emit('RPI_ROLE_UPDATE', node_list_map.get(id_2))
+
+                current_initiator_id = id_1
+                current_reflector_id = id_2
+            }
         }
-
-        let node_pair = node_pair_array[node_pair_id]
-
-        node_list_map.get(node_pair[0]).node_mode = 'I'
-        node_list_map.get(node_pair[1]).node_mode = 'R'
-
-        io.emit('RPI_ROLE_UPDATE', node_list_map.get(node_pair[0]))
-        io.emit('RPI_ROLE_UPDATE', node_list_map.get(node_pair[1]))
-    
-        wait_meas = true
-
-        current_initiator_id = node_pair[0]
-        current_reflector_id = node_pair[1]
     }
-}, 2000)
+}, 30000)
 
 /*
     * ON    - 
