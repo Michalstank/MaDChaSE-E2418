@@ -198,7 +198,8 @@ distance =[
 1454,
 1454
 ]
-#Number of bins for the plot 
+
+#Number of bins for the plot (customize the plot)
 #bins = [0.7 ,0.8, 0.9, 1.0, 1.1, 1.2, 1.3]
 
 plt.hist(distance,len(distance)+2, edgecolor='black')
