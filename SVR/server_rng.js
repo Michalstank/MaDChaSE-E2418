@@ -138,29 +138,41 @@ io.on('connection', (socket) => {
     socket.on('SVR_DATA_CONTENT', (data) => {
         const time = new Date()
 
+        while(data[0] != '{'){
+            data = data.slice(1);
+        }
+
         let json_data = JSON.parse(data)
 
-        if(json_data['quality'] == 0){
-            node_pair_id+=1
-            wait_meas = false
-        }
-
-        if(node_pair_id >= node_pair_array.length){
-            node_pair_id = 0
-        }
-
-        const csv_header = [`Initiator`,`Reflector`,`Time_local`,`i_local`,`q_local`,`i_remote`,`q_remote`,`hopping_sequence`,
+        let csv_header = [`Initiator`,`Reflector`,`Time_local`,`i_local`,`q_local`,`i_remote`,`q_remote`,`hopping_sequence`,
         `sinr_local`,`sinr_remote`,`ifft_mm`,`phase_slope_mm`,`rssi_openspace_mm`,`best_mm`,`highprec_mm`,
         `link_loss_dB`,`duration_us`,`rssi_local_dB`,`rssi_remote_dB`,`txpwr_local_dB`,`txpwr_remote_dB`,`quality`]
 
-        const csv_line_start = [current_initiator_id, current_reflector_id, `${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}:${time.getMilliseconds()}`];
-
-        let csvContent = csv_line_start + ','
-
-        for(let type in json_data){
-            csvContent += `${String(json_data[type]).replace(/,/g,';')}` + ','
-        }
-
+        let csvContent = `
+        ${current_initiator_id},
+        ${current_reflector_id},
+        ${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}:${time.getMilliseconds()},
+        [${json_data['i_local'].join(',')}],
+        [${json_data['q_local'].join(',')}],
+        [${json_data['i_remote'].join(',')}],
+        [${json_data['q_remote'].join(',')}],
+        [${json_data['hopping_sequence'].join(',')}],
+        [${json_data['sinr_local'].join(',')}],
+        [${json_data['sinr_remote'].join(',')}],
+        ${json_data['ifft_mm']},
+        ${json_data['phase_slope_mm']},
+        ${json_data['rssi_openspace_mm']},
+        ${json_data['best_mm']},
+        ${json_data['highprec_mm']},
+        ${json_data['link_loss_dB']},
+        ${json_data['duration_us']},
+        ${json_data['rssi_local_dB']},
+        ${json_data['rssi_remote_dB']},
+        ${json_data['txpwr_local_dB']},
+        ${json_data['txpwr_remote_dB']},
+        ${json_data['quality']}
+        `
+        
         csvContent += line_end
 
         console.log("New Measurement:");
