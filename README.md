@@ -24,14 +24,17 @@ Det utviklede systemet baserer seg på noder i form av nRF52833 Dk. og RPI 3B+. 
 For å sette opp systemet kreves det følgende hardware:
 - En Router / Access Point med Wi-Fi
 - nRF52833 Dk.
-- Raspberry Pi 3B+ (Eller tilsvarende modell som støtter---)
+- Raspberry Pi 3B+ (Eller tilsvarende modell som støtter Rasbian v11.9)
 - Micro SD kort
-
+- Power Supply kabel
+- USB-A til Micro-USB-B kabel
 
 ## Software Requirements
 - Mulighet for å sjekke IP av enheter koblet til Routeren / Access Point
-- Minst NodeJS v18.13.0
+- Minst versjon av NodeJS v18.13.0
 - Node pakkene: socketio, express.
+## nRF Libraries
+-
 
 # Guide for oppsett
 
@@ -96,12 +99,12 @@ sudo nano /etc/rc.local
 
 | Flag | Funksjon |
 |------|----------|
-|`-p`  |          |
-|`-j`  |          |
-|`-d`  |          |
-|`-f`  |          |
-|`-r`  |          |
-|`-s`  |          |
+|`-p`  | Installerer nødvendige Python-bibliotek systemet benytter. |
+|`-d`  | Laster ned de nye filene for noden: Client.py og Zephyr.hex (Fastvare for nFR). |
+|`-f`  | Installer JLink på RPI og lager et eget directory for den. |
+|`-j`  | Installerer fastvare til nRF-en ved hejlp av HEX-filer via. JLink. |
+|`-r`  | Sletter gammelt directory laget for JLink. |
+|`-s`  | Starter klient-delen etter prosessering av tidligere flagg. |
 
 ## Flagg Kode
 ### Flagg '-p' Kode
@@ -113,26 +116,6 @@ sudo nano /etc/rc.local
 			sudo pip install "python-socketio[client]"
 
 			sudo pip install pyserial
-		;;
-```
-### Flagg '-j' Kode
-```bash
-#Install JLink
-		j) 
-			#Remove Old JLink Folder
-			sudo rm -r JLINK_DATA
-
-			#Download JLink Package
-			sudo wget --post-data 'accept_license_agreement=accepted&non_emb_ctr=confirmed&submit=Download+software' https://www.segger.com/downloads/jlink/JLink_Linux_arm.tgz
-
-			#Create Unpack Directory
-			sudo mkdir JLINK_DATA
-
-			#Unpack JLink into Its New Directory
-			sudo tar -xf JLink_Linux_arm.tgz -C ./JLINK_DATA --strip-components=1
-
-			#Delete JLink Package
-			sudo rm JLink_Linux_arm.tgz
 		;;
 ```
 ### Flagg '-d' Kode
@@ -176,6 +159,26 @@ sudo nano /etc/rc.local
 
 			#Return the the previous directory after done with flashing
 			cd ..
+		;;
+```
+### Flagg '-j' Kode
+```bash
+#Install JLink
+		j) 
+			#Remove Old JLink Folder
+			sudo rm -r JLINK_DATA
+
+			#Download JLink Package
+			sudo wget --post-data 'accept_license_agreement=accepted&non_emb_ctr=confirmed&submit=Download+software' https://www.segger.com/downloads/jlink/JLink_Linux_arm.tgz
+
+			#Create Unpack Directory
+			sudo mkdir JLINK_DATA
+
+			#Unpack JLink into Its New Directory
+			sudo tar -xf JLink_Linux_arm.tgz -C ./JLINK_DATA --strip-components=1
+
+			#Delete JLink Package
+			sudo rm JLink_Linux_arm.tgz
 		;;
 ```
 ### Flagg '-r' Kode
