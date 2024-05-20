@@ -20,7 +20,7 @@ Alle relevante filer inkludert dette databladet finnes under følgende link: htt
     3. [Server Oppsett](#Server-Oppsett)
     4. [Distribusjon av fastvare](#distribusjon-av-fastvare)
     5. [RPI Oppsett](#RPI-Oppsett)
-5. [Bashscript](#bashscript)
+5. [Bash Script](#bashscript)
     1. [Flagg Oversikt](#flagg-oversikt)
     2. [Flagg Kode](#flagg-kode)
   
@@ -83,44 +83,44 @@ sio.connect('http://IP:PORT', retry = True); example: sio.connect('http://192.16
 
 ## Distribusjon av fastvare
 
-Nodene i prosjektet henter programvaren sin fra et gitt [Github Repo.](https://github.com/Michalstank/MaDChaSE-E2418-Fastvare) Om du har lyst å endre hvilket repo fastvaren lastes ned fra, endr linken i flagg ['-d'](#flagg--d-kode) i bashscriptet til ønsket repo.<br/> HUSK: linken som erstattes skal være til et 'raw' format av filen på github. Dette gir deg muligheten til å teste ut din egen fastvare på nodene. 
+Nodene i prosjektet henter programvaren sin fra et gitt [Github Repo.](https://github.com/Michalstank/MaDChaSE-E2418-Fastvare) Om du har lyst å endre hvilket repo fastvaren lastes ned fra, endr linken i flagg ['-d'](#flagg--d-kode) i bash scriptet til ønsket repo.<br/> HUSK: linken som erstattes skal være til et 'raw' format av filen på github. Dette gir deg muligheten til å teste ut din egen fastvare på nodene. 
 
 ## RPI Oppsett
 
 Denne delen forklarer trinnvis hvordan nodene skal settes opp og programmeres. For hver node i systemet gjennomfør følgende oppstartsprosedyre:
 
-1. Last ned filene: [Bashscript](https://github.com/Michalstank/MaDChaSE-E2418/blob/main/RPI/node_system.sh), [Raspberry Pi Imager](https://downloads.raspberrypi.org/imager/imager_latest.exe) og [RPI Image](https://downloads.raspberrypi.com/raspios_oldstable_full_armhf/images/raspios_oldstable_full_armhf-2024-03-12/2024-03-12-raspios-bullseye-armhf-full.img.xz).
+1. Last ned filene: [Bash Script](https://github.com/Michalstank/MaDChaSE-E2418/blob/main/RPI/node_system.sh), [Raspberry Pi Imager](https://downloads.raspberrypi.org/imager/imager_latest.exe) og [RPI Image](https://downloads.raspberrypi.com/raspios_oldstable_full_armhf/images/raspios_oldstable_full_armhf-2024-03-12/2024-03-12-raspios-bullseye-armhf-full.img.xz).
 3. Flash RPI SD kortet ved bruk av Raspberry Pi Imager, bildet nedenfor viser anbefalt konfigurasjon. (Huske å legge til Wi-Fi login og passord til nettverket du ønsker at nodene skal kobles på):<br />
    ![image](https://github.com/Michalstank/MaDChaSE-E2418/assets/31627253/1cca488a-f8cd-445a-be60-3683ddc801fe)
 
 5. Legg inn SD-kortet i RPI og kobl enheten til strøm. Deretter logg på Router / Access Point for å hente dens IP-adresse.
-6. Send over bashscript-filen ved bruk av:
+6. Send over bash script-filen ved bruk av:
 ```bash
-scp PATH_TO_BASHSCRIPT rpi_navn@rpi_ip:/home/rpi_navn/
+scp PATH_TO_BASH_SCRIPT rpi_navn@rpi_ip:/home/rpi_navn/
 ```
 6. Kobl deg opp til noden ved hjelp av SSH-protokollen: <br /> Hint: Dette steget kan unngås dersom du kobler opp din RPI til en skjerm og tastatur. Etter oppkoblingen åpn opp terminalen og følg steg 7.
 ```bash
 shh rpi_navn@rpi_ip 
 ```
-7. Gjør Bashscriptet til en executable:
+7. Gjør Bash scriptet til en executable:
 ```bash
-chmod u+x bashscript_navn.sh
+chmod u+x bash_script_navn.sh
 ```
-8. Nå er det mulig å kjøre Bashscriptet dersom man er i samme directory som den:
+8. Nå er det mulig å kjøre Bash scriptet dersom man er i samme directory som den:
 ```bash
-./bashscript_navn.sh
+./bash_script_navn.sh
 ```
-9. Bashscriptet kan nå også konfigureres til å kjøre ved systemstart. Dette gjøres ved å legge dens 'path' til rc.local filen:
+9. Bash scriptet kan nå også konfigureres til å kjøre ved systemstart. Dette gjøres ved å legge dens 'path' til rc.local filen:
 ```bash
 sudo nano /etc/rc.local
 ```
 10. Dersom du har fulgt stegene skal oppsettet ligne på det nedenfor:
 ```bash
 #Kommentar og default kode over...
-./home/rpi_navn/bashscript_navn.sh
+./home/rpi_navn/bash_script_navn.sh
 ```
 
-# Bashscript
+# Bash Script
 Nodenes fastvare oppdateres ved hjelp av et Bash script. Det anvendes for å laste ned bibliotekene, filene og verktøyene som brukes på RPI-en.
 ## Flagg Oversikt
 
@@ -178,7 +178,7 @@ Nodenes fastvare oppdateres ved hjelp av et Bash script. Det anvendes for å las
 			expect "Device>"	{ send "nrf52833\r"	}
 			expect "TIF>" 		{ send "S\r" 		}
 			expect "Speed>"		{ send "\r" 		}
-			expect "J-Link>"	{ send "loadfile /home/e2418/BashTest/zephyr.hex\r"}
+			expect "J-Link>"	{ send "loadfile /home/e2418/zephyr.hex\r"}
 			expect "J-Link>"	{ send "r\r"		}
 			expect "J-Link>"	{ send "g\r"		}
 			expect "J-Link>"	{ send "exit\r"		}
