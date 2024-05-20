@@ -78,10 +78,10 @@ sio.connect('http://IP:PORT', retry = True), example: sio.connect('http://192.16
 
 ## RPI Oppsett
 
-Dette section fokuserer på forklaring av hvordan nodene skal settes opp og programeres
+Denne delen forklarer trinnvis hvordan nodene skal settes opp og programmeres. 
 
 1. Last ned følgende filer: [Bashscript](), [Raspberry Pi Imager](https://downloads.raspberrypi.org/imager/imager_latest.exe) og [RPI Image](https://downloads.raspberrypi.com/raspios_oldstable_full_armhf/images/raspios_oldstable_full_armhf-2024-03-12/2024-03-12-raspios-bullseye-armhf-full.img.xz).
-3. Flash RPI SD kortet ved bruk av Raspberry Pi Imager, bildet nede viser anbefal konfigurasjon (Huske på å legge til Wi-Fi passord og login til nettverket du onsker at nodene skal kobles på):<br />
+3. Flash RPI SD kortet ved bruk av Raspberry Pi Imager, bildet nedenfor viser anbefalt konfigurasjon. (Huske å legge til Wi-Fi passord og login til nettverket du ønsker at nodene skal kobles på):<br />
    ![image](https://github.com/Michalstank/MaDChaSE-E2418/assets/31627253/1cca488a-f8cd-445a-be60-3683ddc801fe)
 
 5. Kobl opp RPI til strøm og deretter logg på Router / Access Point for å hente IP adressen til den.
