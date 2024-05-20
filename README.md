@@ -217,5 +217,5 @@ sudo nano /etc/rc.local
 ```
 
 # Anerkjennelser
-- Vi vil rette en spesiell takk til vår eksterne veileder Carsten Wulf, for teknisk assistanse og verdifulle tilbakemeldinger underveis i prosjektgjennomføringen.
-- Vi vil også takke vår prosessveileder Arne Midjo for råd og støtte gjennom hele prosjektet.
+- Vi vil rette en spesiell takk til vår eksterne veileder [Carsten Wulf](https://www.ntnu.no/ansatte/carstenw), for teknisk assistanse og verdifulle tilbakemeldinger underveis i prosjektgjennomføringen.
+- Vi vil også takke vår prosessveileder [Arne Midjo](https://www.ntnu.no/ansatte/arne.midjo) for råd og støtte gjennom hele prosjektet.
