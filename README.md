@@ -25,8 +25,7 @@ Det utviklede systemet baserer seg på noder i form av [nRF52833 Dk.]( https://w
 ![image](https://github.com/shakerhoudini/VHDL/blob/9421bcb0c60f7aab8808be60aede336b4b58db95/blok_diag.png)
 
 # Requirements
-## Hardware Requirements
-For å sette opp systemet kreves det følgende hardware:
+## Hardware 
 - En Router / Access Point med Wi-Fi
 - nRF52833 Dk.
 - Raspberry Pi 3B+ (Eller tilsvarende modell som støtter Rasbian v11.9)
@@ -34,7 +33,7 @@ For å sette opp systemet kreves det følgende hardware:
 - Power Supply for RPI 
 - USB-A til Micro-USB-B kabel
 
-## Software Requirements
+## Software 
 - Mulighet for å sjekke IP av enheter koblet til Routeren / Access Point
 - Minst versjon av NodeJS v18.13.0
 - Node pakkene: socketio, express.
