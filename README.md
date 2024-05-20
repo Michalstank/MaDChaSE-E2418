@@ -11,14 +11,14 @@ Alle relevante filer inkludert dette databladet finnes under følgende link: htt
 
 ## Innholdsfortegnelse
 1. [Systemarkitektur](#systemarkitektur)
-1. [Requirements](#Requirements)
-	2.[test]() 
-1. [Guide for oppsett](#guide-for-oppsett)
-    2. [Hardware Oppsett](#Hardware-Oppsett)
+2. [Requirements](#Requirements)
+   1. [test]() 
+4. [Guide for oppsett](#guide-for-oppsett)
+    1. [Hardware Oppsett](#Hardware-Oppsett)
     3. [Server Oppsett](#Server-Oppsett)
     4. [Distribusjon av fastvare](#distribusjon-av-fastvare)
     5. [RPI Oppsett](#RPI-Oppsett)
-2. Bashscript
+5. Bashscript
     1. [Flagg Oversikt](#flagg-oversikt)
     2. [Flagg Kode](#flagg-kode)
   
