@@ -12,8 +12,10 @@ Alle relevante filer inkludert dette databladet finnes under følgende link: htt
 ## Innholdsfortegnelse
 1. [Oppsett](#Oppsett)
     1. [Requirements](#Requirements)
-    2. [Server Oppsett](#Server-Oppsett)
-    3. [RPI Oppsett](#RPI-Oppsett)
+    2. [Hardware Oppsett](#Hardware-Oppsett)
+    3. [Server Oppsett](#Server-Oppsett)
+    4. [Distribusjon av fastvare](#distribusjon-av-fastvare)
+    5. [RPI Oppsett](#RPI-Oppsett)
 2. Bashscript
     1. [Flagg Oversikt](#flagg-oversikt)
     2. [Flagg Kode](#flagg-kode)
@@ -75,7 +77,7 @@ node server_file_name.js
 sio.connect('http://IP:PORT', retry = True); example: sio.connect('http://192.168.2.12:3000', retry = True) 
 ```
 
-## Oppsett av fastvare til nodene:
+## Distribusjon av fastvare
 
 Nodene i prosjektet henter programvaren sin fra et gitt [Github Repo.](https://github.com/Michalstank/MaDChaSE-E2418-Fastvare) Om du har lyst å endre hvilket repo fastvaren lastes ned fra, endr linken i flagg ['-d'](#flagg--d-kode) i bashscriptet til ønsket repo.<br/> HUSK: linken som erstattes skal være til et 'raw' format av filen på github. Dette gir deg muligheten til å teste ut din egen fastvare på nodene. 
 
