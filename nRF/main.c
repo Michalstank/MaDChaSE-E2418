@@ -1,5 +1,14 @@
 /*
-	* Comments for this project were written while using VS Code Extension: "BETTER COMMENTS by Aaron Bond" as it provides better readability.
+	* USE EXTENSION "BETTER COMMENTS by Aaron Bond" FOR BETTER READABILITY
+	
+	Ref:
+
+	Normal Comment
+	//Crossed off Comment (if in multiline comment)
+	!RED ERROR LIKE COMMENT
+	TODO: TODO ITEM
+	* BRIGH COMMENT
+	? QUESTION COMMENT ?
 */
 
 #include <zephyr/kernel.h>
@@ -52,11 +61,6 @@ int main(void)
 	//If Error Code Match Return Error Code
 	if(err == -ENOSYS){
 		return -ENOSYS;
-	}
-
-	err = uart_callback_set(uart_dev, uart_cb, NULL);
-	if(err){
-		return err;
 	}
 
 	uart_init();
