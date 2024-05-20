@@ -121,6 +121,7 @@ sudo nano /etc/rc.local
 ```
 
 # Bashscript
+Nodenes fastvare oppdateres ved hjelp av et Bash script. Det anvendes for å laste ned bibliotekene, filene og verktøyene som brukes på RPI-en.
 ## Flagg Oversikt
 
 | Flag | Funksjon |
