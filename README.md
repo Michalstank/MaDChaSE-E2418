@@ -50,9 +50,9 @@ Guiden for å sette opp systemet kan deles inn i tre underdeler:
 - RPI
 
 ## Hardware oppsett
-RPI 3B+ og nRF52833 Dk. som utgjør nodene, kommuniserer med hverandre ved hjelp av UART-protokollen. Kobl derfor 
+RPI 3B+ og nRF52833 Dk. som utgjør nodene, kommuniserer med hverandre ved hjelp av UART-protokollen. Kobl derfor de sammen ved hjelp av en USB-kabel. 
 
-Det ble utviklet en innkapsling til nodene som kan [3D.printes](https://github.com/Michalstank/MaDChaSE-E2418/tree/48b5f4ba134b89f2b8a7d6ff9e974852505d02e9/Extras)
+Videre ble det utviklet en innkapsling til nodene som kan 3D-printes. De tilhørende filene finnes [her](https://github.com/Michalstank/MaDChaSE-E2418/tree/48b5f4ba134b89f2b8a7d6ff9e974852505d02e9/Extras)
 ![image](https://github.com/shakerhoudini/VHDL/blob/395771d89b2dca0d43f5f726d94a6666bfbc4f7c/Nodes.png)
 
 RPI skal kobles til strøm og nRF skal kobles til en av USB-A portene på RPI.
