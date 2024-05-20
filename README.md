@@ -44,6 +44,10 @@ Det utviklede systemet baserer seg på noder i form av [nRF52833 Dk.]( https://w
 - [libnrf_dm.a](https://github.com/nrfconnect/sdk-nrfxlib/blob/main/nrf_dm/lib/nrf52833/hard-float/libnrf_dm.a)
 
 # Guide for oppsett
+Guiden for å sette opp systemet kan deles inn i tre underdeler: 
+    1. [Hardware oppsett](##Hardware oppsett)
+    2. [Server Oppsett](#Server-Oppsett)
+    3. [RPI Oppsett](#RPI-Oppsett)
 
 ## Hardware oppsett
 RPI 3B+ og nRF52833 Dk. som utgjør nodene, kommuniserer med hverandre ved hjelp av UART-protokollen. Kobl derfor 
