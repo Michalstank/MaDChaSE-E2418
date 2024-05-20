@@ -5,3 +5,4 @@ Denne mappen inneholder main.c filen og de tilhørende bibliotekene for nRF52833
 - main.c = Hovedkoden for nRF-enhetene.
 - nrf_dm.h = Header fil for libnrf_dm.a biblioteket.
 - uart_com.h = Bibliotek for UART kommunikasjon.
+- zephyr.hex = Hovedfilen som skal lastes opp på nRF-enhetene.
