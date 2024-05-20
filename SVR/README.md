@@ -1,10 +1,11 @@
 # Innhold: 
 
-I denne mappen finnes følgende filer:
+I denne mappen finnes følgende elementer:
 
 - main.html = Brukergrensesnittet.
 - server_list.js eller server_rng.js = to varianter av koden for serveren.
 - node_test.html = Simulator
+- csvmeas = mappen der målingene lagres
 
 ## Hvorfor to varianter av serveren ? 
 
