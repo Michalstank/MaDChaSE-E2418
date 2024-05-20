@@ -223,5 +223,5 @@ Nodenes fastvare oppdateres ved hjelp av et Bash script. Det anvendes for å las
 ```
 
 # Anerkjennelser
-- Vi vil rette en spesiell takk til vår eksterne veileder [Carsten Wulf](https://www.ntnu.no/ansatte/carstenw), for teknisk assistanse og verdifulle tilbakemeldinger underveis i prosjektgjennomføringen. Vi setter pris på [eksempelkoden](https://github.com/wulffern/nrfdmiq/tree/main) vi fikk mulighet til å ta i bruk.
+- Vi vil rette en spesiell takk til vår eksterne veileder [Carsten Wulff](https://www.ntnu.no/ansatte/carstenw), for teknisk assistanse og verdifulle tilbakemeldinger underveis i prosjektgjennomføringen. Vi setter pris på [eksempelkoden](https://github.com/wulffern/nrfdmiq/tree/main) vi fikk mulighet til å ta i bruk.
 - Vi vil også takke vår prosessveileder [Arne Midjo](https://www.ntnu.no/ansatte/arne.midjo) for råd og støtte gjennom hele prosjektet.
