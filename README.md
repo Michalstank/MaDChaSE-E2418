@@ -83,15 +83,15 @@ Denne delen forklarer trinnvis hvordan nodene skal settes opp og programmeres. F
    ![image](https://github.com/Michalstank/MaDChaSE-E2418/assets/31627253/1cca488a-f8cd-445a-be60-3683ddc801fe)
 
 5. Legg inn SD-kortet i RPI og kobl enheten til strøm. Deretter logg på Router / Access Point for å hente dens IP-adresse.
-6. Send over bashscript filen ved bruk av:
+6. Send over bashscript-filen ved bruk av:
 ```bash
 scp PATH_TO_BASHSCRIPT rpi_navn@rpi_ip:/home/rpi_navn/
 ```
-6. Kobl til noden ved bruk av:
+6. Kobl deg opp til noden ved hjelp av SSH-protokollen:
 ```bash
 shh rpi_navn@rpi_ip 
 ```
-7. Gjør Bashscript til en executable:
+7. Gjør Bashscriptet til en executable:
 ```bash
 chmod u+x bashscript_name.sh
 ```
@@ -103,7 +103,7 @@ chmod u+x bashscript_name.sh
 ```bash
 sudo nano /etc/rc.local
 ```
-10. Ved å følge oppsettet den skal ligne på dette her:
+10. Dersom du har fulgt stegene skal oppsettet ligne på det nedenfor:
 ```bash
 #Kommentar og default kode over...
 ./home/rpi_navn/bashscript_navn.sh
