@@ -7,7 +7,7 @@ I denne mappen finnes følgende elementer:
 - node_test.html = Simulator
 - csvmeas = mappen der målingene lagres
 
-## Hvorfor to varianter av serveren ? 
+## To varianter av serveren ? 
 
 I prosjektet ble det utviklet to forskjellige algoritmer for orkestrering av kanalmålingsprosedyren: 
 - Rng = Randomisert
