@@ -56,7 +56,7 @@ Det ble også utviklet en innkapsling til nodene som kan 3D-printes. De tilhøre
 
 ## Server oppsett
 
-Denne delen har som formål å vise de nødvendige stegene for å sette opp serveren. 
+Denne delen har som formål å presentere de nødvendige stegene for å sette opp serveren. 
 
 1. Last ned [Server Files](https://github.com/Michalstank/MaDChaSE-E2418/tree/main/SVR).
 2. Utpakk filene og bestem hvilken algoritme du ønsker å bruke (list eller rng.).
