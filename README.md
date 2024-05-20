@@ -90,7 +90,7 @@ Denne delen forklarer trinnvis hvordan nodene skal settes opp og programmeres. F
 ```bash
 scp PATH_TO_BASHSCRIPT rpi_navn@rpi_ip:/home/rpi_navn/
 ```
-6. Kobl deg opp til noden ved hjelp av SSH-protokollen: <br /> Hint: Dette steget kan unngås dersom du kobler opp din RPI til en skjerm og tastatur. Etter oppkoblingen åpn opp terminalen og følg neste steg.
+6. Kobl deg opp til noden ved hjelp av SSH-protokollen: <br /> Hint: Dette steget kan unngås dersom du kobler opp din RPI til en skjerm og tastatur. Etter oppkoblingen åpn opp terminalen og følg steg 7.
 ```bash
 shh rpi_navn@rpi_ip 
 ```
