@@ -216,6 +216,6 @@ sudo nano /etc/rc.local
 	;;
 ```
 
-# Credits 
-
-
+# Anerkjennelser
+- Vi vil rette en spesiell takk til vår eksterne veileder Carsten Wulf, for teknisk assistanse og verdifulle tilbakemeldinger underveis i prosjektgjennomføringen.
+- Vi vil også takke vår prosessveileder Arne Midjo for råd og støtte gjennom hele prosjektet.
