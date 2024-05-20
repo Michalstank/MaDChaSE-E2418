@@ -82,7 +82,7 @@ Denne delen forklarer trinnvis hvordan nodene skal settes opp og programmeres. F
 3. Flash RPI SD kortet ved bruk av Raspberry Pi Imager, bildet nedenfor viser anbefalt konfigurasjon. (Huske å legge til Wi-Fi login og passord til nettverket du ønsker at nodene skal kobles på):<br />
    ![image](https://github.com/Michalstank/MaDChaSE-E2418/assets/31627253/1cca488a-f8cd-445a-be60-3683ddc801fe)
 
-5. Legg inn SD-kortet i RPI og kobl enheten til strøm. Deretter logg på Router / Access Point for å hente IP adressen til den.
+5. Legg inn SD-kortet i RPI og kobl enheten til strøm. Deretter logg på Router / Access Point for å hente dens IP-adresse.
 6. Send over bashscript filen ved bruk av:
 ```bash
 scp PATH_TO_BASHSCRIPT rpi_navn@rpi_ip:/home/rpi_navn/
