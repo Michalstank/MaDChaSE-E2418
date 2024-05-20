@@ -18,8 +18,6 @@ Alle relevante filer inkludert dette databladet finnes under følgende link: htt
     1. [Flagg Oversikt](#flagg-oversikt)
     2. [Flagg Kode](#flagg-kode)
   
-  
-  
 # Systemarkitektur
 Det utviklede systemet baserer seg på noder i form av [nRF52833 Dk.]( https://www.nordicsemi.com/Products/Development-hardware/nRF52833-DK) og [RPI 3B+](https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/). nRF-enheten gjennomfører kanalmålinger, mens RPI 3B+ står for nettverkskommunikasjon og distribuerer fastvare nødvendig for målingene. En server brukes som mellomleddet mellom nodene og brukergrensesnittet. Serveren kommuniserer med nodene over et WiFi-nettverk og står for kanalmålingsorkestrering og samhandling. Brukergrensesnittet er i form av en nettside. 
 ![image](https://github.com/shakerhoudini/VHDL/blob/9421bcb0c60f7aab8808be60aede336b4b58db95/blok_diag.png)
@@ -78,7 +76,7 @@ sio.connect('http://IP:PORT', retry = True), example: sio.connect('http://192.16
 
 ## RPI Oppsett
 
-Denne delen forklarer trinnvis hvordan nodene skal settes opp og programmeres. 
+Denne delen forklarer trinnvis hvordan nodene skal settes opp og programmeres. For hver node i systemet gjennomfør følgende oppstartsprosedyre:
 
 1. Last ned følgende filer: [Bashscript](), [Raspberry Pi Imager](https://downloads.raspberrypi.org/imager/imager_latest.exe) og [RPI Image](https://downloads.raspberrypi.com/raspios_oldstable_full_armhf/images/raspios_oldstable_full_armhf-2024-03-12/2024-03-12-raspios-bullseye-armhf-full.img.xz).
 3. Flash RPI SD kortet ved bruk av Raspberry Pi Imager, bildet nedenfor viser anbefalt konfigurasjon. (Huske å legge til Wi-Fi passord og login til nettverket du ønsker at nodene skal kobles på):<br />
