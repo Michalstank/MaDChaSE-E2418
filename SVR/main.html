@@ -2,6 +2,7 @@
 <html>
 <head>     
   <style>
+
     body {
       font-family: 'lato', sans-serif;
     }
@@ -140,15 +141,6 @@
     //Main const variable which is used to establish connection with the server
     const WEB_CLIENT = io();
 
-    function node_restart(data){
-      WEB_CLIENT.emit("SVR_NODE_RESTART", data)
-    }
-
-    function node_msg(data){
-      let inp_field = document.getElementById(`inp_${data}`)
-      WEB_CLIENT.emit("SVR_NODE_MSG",[data,inp_field.value])
-    }
-
     //Function used to add new nodes to the node display
     function node_add_row(data){
       //Find the element of the webpage used to display nodes and save it into a variable
@@ -166,17 +158,41 @@
       </li>`
     }
 
+    /*
+        * ON    - User Input
+        * FROM  - 
+        * TO    - SVR
+
+        - Used to restart a specific node
+    */
+    function node_restart(data){
+      WEB_CLIENT.emit("SVR_NODE_RESTART", data)
+    }
+
+    /*
+        * ON    - User Input
+        * FROM  - 
+        * TO    - SVR
+
+        - Used to send a node specific message
+    */
+    function node_msg(data){
+      let inp_field = document.getElementById(`inp_${data}`)
+      WEB_CLIENT.emit("SVR_NODE_MSG",[data,inp_field.value])
+    }
+
+    /*
+        * ON    - User Key Press
+        * FROM  - 
+        * TO    - SVR
+
+        - Changes the mode of the website to function as a simulator
+    */
     document.onkeypress = (e) => {
       if(e.key == 's'){
         WEB_CLIENT.emit('SVR_WEB_MODE_CHANGE', 0);
       }
     }
-
-    //###############################################
-    //###                                         ###
-    //###             COMMUNICATION               ###
-    //###                                         ###
-    //###############################################
 
     /*
       * ON    - connect
@@ -185,11 +201,13 @@
       
       - Transmit request for the list of nodes which are connected to the server
     */
-    WEB_CLIENT.on('connect',          (data) => {
+    WEB_CLIENT.on('connect',          () => {
+      //Reset node display filed
+      document.getElementById('node_list_display').innerHTML = '';
+
       //Request Sent to the server
-      //Empty packet
       WEB_CLIENT.emit('SVR_LIST_REQUEST', null);
-      
+
       //Log on the website that webpage has connected to the server
       console.log("Connection established with the server.")
     })
