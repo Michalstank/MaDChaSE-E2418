@@ -1,8 +1,13 @@
 #!/bin/bash
-while getopts "pjrdfs" arg; do
+while getopts "pjdfrs" arg; do
 	case $arg in
-		#Install needed python packages
+		#Update rpi system and Install needed python packages
 		p) 
+			#Update RPI system
+			sudo apt-get -y update
+
+			sudo apt-get -y upgrade
+
 			#Install needed python packages
 			sudo pip install python-socketio
 
@@ -11,7 +16,7 @@ while getopts "pjrdfs" arg; do
 			sudo pip install pyserial
 		;;
 		#Install JLink
-		j) 
+		j)
 			#Remove Old JLink Folder
 			sudo rm -r JLINK_DATA
 
@@ -40,7 +45,7 @@ while getopts "pjrdfs" arg; do
 			wget --no-check-certificate "https://raw.githubusercontent.com/Michalstank/MaDChaSE-E2418-Fastvare/main/zephyr.hex"
 		;;
 		#Flash Using JLink
-		f)	
+		f)
 			#Download Expect and Install Expect, Needed For Flashing/Dealing with JLink
 			sudo apt-get -y install expect
 
@@ -55,7 +60,7 @@ while getopts "pjrdfs" arg; do
 				expect "Device>"	{ send "nrf52833\r"	}
 				expect "TIF>" 		{ send "S\r" 		}
 				expect "Speed>"		{ send "\r" 		}
-				expect "J-Link>"	{ send "loadfile /home/e2418/BashTest/zephyr.hex\r"}
+				expect "J-Link>"	{ send "loadfile /home/e2418/zephyr.hex\r"}
 				expect "J-Link>"	{ send "r\r"		}
 				expect "J-Link>"	{ send "g\r"		}
 				expect "J-Link>"	{ send "exit\r"		}
@@ -69,7 +74,7 @@ while getopts "pjrdfs" arg; do
 			sudo rm -r JLINK_DATA
 		;;
 		#Run the server
-		s) 
+		s)
 			python client.py
 		;;
 	esac
