@@ -9,7 +9,7 @@ Dette er repositoriet for bacheloroppgaven "MaDChaSE", i forbindelse med studier
 
 Alle relevante filer inkludert dette databladet finnes under følgende link: https://github.com/Michalstank/MaDChaSE-E2418
 
-## Table of contents
+## Innholdsfortegnelse
 1. [Oppsett](#Oppsett)
     1. [Requirements](#Requirements)
     2. [Server Oppsett](#Server-Oppsett)
