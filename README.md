@@ -74,6 +74,8 @@ node server_file_name.js
 sio.connect('http://IP:PORT', retry = True), example: sio.connect('http://192.168.2.12:3000', retry = True) 
 ```
 
+## Oppsett av fastvare til nodene:
+
 ## RPI Oppsett
 
 Denne delen forklarer trinnvis hvordan nodene skal settes opp og programmeres. For hver node i systemet gjennomfør følgende oppstartsprosedyre:
