@@ -69,7 +69,7 @@ node server_file_name.js
 ```bash
 192.168.10.187:3000 or localhost:3000
 ```
-7. For at RPI-ene skal koble seg opp til serveren din, Endr client.py filen. Definer IP'en du tidligere fant på linje 119:
+7. For at nodeene skal være i stand til å koble seg opp til serveren din, Endr client.py filen. Definer IP'en du tidligere fant på linje 119:
 ```python
 sio.connect('http://IP:PORT', retry = True), example: sio.connect('http://192.168.2.12:3000', retry = True) 
 ```
