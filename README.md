@@ -12,7 +12,9 @@ Alle relevante filer inkludert dette databladet finnes under følgende link: htt
 ## Innholdsfortegnelse
 1. [Systemarkitektur](#systemarkitektur)
 2. [Requirements](#Requirements)
-   1. [test]() 
+   1. [Hardware](#hardware)
+   2. [Software](#software)
+   3. [nRF Libraries](#nrf-libraries) 
 4. [Guide for oppsett](#guide-for-oppsett)
     1. [Hardware Oppsett](#Hardware-Oppsett)
     3. [Server Oppsett](#Server-Oppsett)
