@@ -1,3 +1,8 @@
 # Extras
 
-Dette er en repository som inkluderer alle andre forskjelige filer som inherentlly var ikke en del av prosjektet direkte. De var brukt for enten 3d printing eller å lage figurer og behandle data som ble målt av systemet.
+Dette er en mappe som inneholder andre relevante ting for prosjektet. Dette inkluderer:
+- Filene for 3D-printing av innkapslingen.
+- Plotting av data
+- Rå data fra de gjennomførte testene. 
+
+I den endelige løsingen 
