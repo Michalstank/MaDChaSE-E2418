@@ -131,6 +131,11 @@ Nodenes fastvare oppdateres ved hjelp av et Bash script. Det anvendes for å las
 ### Flagg '-p' Kode
 ```bash
 	p) 
+		#Update RPI system
+		sudo apt-get -y update
+
+		sudo apt-get -y upgrade
+
 		#Install needed python packages
 		sudo pip install python-socketio
 
