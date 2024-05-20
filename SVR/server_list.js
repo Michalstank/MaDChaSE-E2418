@@ -1,7 +1,6 @@
 let app = require('express')();
 let http = require('http').Server(app);
 let io = require('socket.io')(http);
-
 let fs = require('fs');
 
 const line_end = "\r\n";
@@ -53,14 +52,13 @@ function generate_node_pair_array(){
     }
 }
 
-//Send File When Connected aka the webpage
+//Send website file when connected by browser
 app.get('/', (req, res) => {
     if(webside_mode == false){
-        res.sendFile('C:/Users/Michal/Desktop/MaDChaSE-main/server/main.html');
+        res.sendFile('C:/Users/micha/Desktop/main.html');
     } else {
-        res.sendFile('C:/Users/Michal/Desktop/MaDChaSE-main/server/node_test.html');
+        res.sendFile('C:/Users/micha/Desktop/node_test.html');
     }
-    
 });
 
 app.get(`/download_csv`,(req,res)=>{
@@ -94,7 +92,7 @@ io.on('connection', (socket) => {
 
         - Transmit Entire Nodelist of connected nodes
     */
-    socket.on('SVR_LIST_REQUEST', (data) => {
+    socket.on('SVR_LIST_REQUEST', () => {
         io.emit('WEB_LIST_RECIEVE', Array.from(node_list_map.values()));
     })
 
@@ -110,6 +108,13 @@ io.on('connection', (socket) => {
         console.log(`Restarting: ${data}`);
     })
 
+    /*
+        * ON    - SVR_NODE_MSG
+        * FROM  - WEB
+        * TO    - RPI
+
+        - Transmit message to a node
+    */
     socket.on('SVR_NODE_MSG', (data) => {
         console.log(`MSG For Node: ${data}`);
     })
@@ -121,7 +126,7 @@ io.on('connection', (socket) => {
 
         - Transmit message for nodes causing them to restart and reflash the nrf
     */
-    socket.on('SVR_NODE_REFLASH', (data) => {
+    socket.on('SVR_NODE_REFLASH', () => {
         io.emit('RPI_NODE_REFLASH', 0);
         node_meas_start = false;
         console.log("Resetting the network");
@@ -134,7 +139,7 @@ io.on('connection', (socket) => {
 
         - Recieve message for the server to start the distance measurement program
     */
-    socket.on('SVR_MEAS_START', (data) => {
+    socket.on('SVR_MEAS_START', () => {
         node_meas_start = true;
         console.log("Measurement Started")
         generate_node_pair_array();
@@ -148,7 +153,7 @@ io.on('connection', (socket) => {
 
         - Recieve message for the server to stop the distance measurement program
     */
-    socket.on('SVR_MEAS_STOP', (req,res) => {
+    socket.on('SVR_MEAS_STOP', () => {
         node_meas_start = false;
         io.emit('RPI_NODE_RESET', 0);
         console.log("Measurement Stopped");
@@ -162,12 +167,9 @@ io.on('connection', (socket) => {
         * data - node_unique_id
 
         - Handle Node connection to the node network
-        ! Doesn't Trigger on webpage connection
+        ! Doesn't trigger on webpage connection
     */
-    socket.on("SVR_NODE_INIT", function(data){
-        //Initialize Node if it was not detected
-        console.log("New Node Initialization")
-        
+    socket.on("SVR_NODE_INIT", function(data){        
         let new_node = new node(data,`RPI_NODE_${node_cnt}`, 'O')
         new_node.connection_id      = socket.id;
 
@@ -181,7 +183,8 @@ io.on('connection', (socket) => {
         if(node_pair_array.length > 1){
             generate_node_pair_array();
         }
-        
+
+        console.log("New Node Initialization")
     })
 
     /*
@@ -194,25 +197,29 @@ io.on('connection', (socket) => {
     socket.on('SVR_DATA_CONTENT',function(data){
         const time = new Date()
 
+        let csv_header = [`Initiator`,`Reflector`,`Time_local`,`i_local`,`q_local`,`i_remote`,`q_remote`,`hopping_sequence`,
+        `sinr_local`,`sinr_remote`,`ifft_mm`,`phase_slope_mm`,`rssi_openspace_mm`,`best_mm`,`highprec_mm`,
+        `link_loss_dB`,`duration_us`,`rssi_local_dB`,`rssi_remote_dB`,`txpwr_local_dB`,`txpwr_remote_dB`,`quality`]
+
+        //Make sure JSON Packet is not corrupted/broken
         while(data[0] != '{'){
             data = data.slice(1);
         }
         
         let json_data = JSON.parse(data)
         
+        //Check if valid measurement
         if(json_data['quality'] == 0){
             node_pair_id = node_pair_id + 1;
             wait_meas = false
         }
 
+        //Check if end of list
         if(node_pair_id >= node_pair_array.length){
             node_pair_id = 0
         }
 
-        let csv_header = [`Initiator`,`Reflector`,`Time_local`,`i_local`,`q_local`,`i_remote`,`q_remote`,`hopping_sequence`,
-        `sinr_local`,`sinr_remote`,`ifft_mm`,`phase_slope_mm`,`rssi_openspace_mm`,`best_mm`,`highprec_mm`,
-        `link_loss_dB`,`duration_us`,`rssi_local_dB`,`rssi_remote_dB`,`txpwr_local_dB`,`txpwr_remote_dB`,`quality`]
-
+        //Processed Measurement into csv string
         let csvContent = `${current_initiator_id},${current_reflector_id},${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}:${time.getMilliseconds()},[${json_data['i_local']}],[${json_data['q_local']}],[${json_data['i_remote']}],[${json_data['q_remote']}],[${json_data['hopping_sequence']}],[${json_data['sinr_local']}],[${json_data['sinr_remote']}],${json_data['ifft_mm']},${json_data['phase_slope_mm']},${json_data['rssi_openspace_mm']},${json_data['best_mm']},${json_data['highprec_mm']},${json_data['link_loss_dB']},${json_data['duration_us']},${json_data['rssi_local_dB']},${json_data['rssi_remote_dB']},${json_data['txpwr_local_dB']},${json_data['txpwr_remote_dB']},${json_data['quality']}`
         
         csvContent += line_end
@@ -245,8 +252,6 @@ io.on('connection', (socket) => {
         At the same time regenerate the measurement pair array and restart the system
     */
     socket.on('disconnect', () => {
-        console.log('A user disconnected');
-
         let node_data = node_connection_key_map.get(socket.id)
 
         io.emit('WEB_NODE_REMOVE', node_list_map.get(node_data));
@@ -259,11 +264,13 @@ io.on('connection', (socket) => {
             generate_node_pair_array();
             node_pair_id = 0;
         }
+
+        console.log('A user disconnected');
     });
 });
 
 /*
-    * ON    - node_meas_start
+    * ON    - 
     * FROM  - 
     * TO    - RPI
 

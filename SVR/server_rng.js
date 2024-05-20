@@ -1,16 +1,15 @@
 let app = require('express')();
 let http = require('http').Server(app);
 let io = require('socket.io')(http);
-
 let fs = require('fs');
 
 const line_end = "\r\n";
 
 function node( unique_id, network_id, mode){
-    this.connection_id = 0;                 // Socket.id
-    this.node_unique_id = unique_id         // RAND NUM
-    this.node_network_id = network_id       // RPI_NODE_n
-    this.node_mode = mode                   // NONE | RELF | INTI
+    this.connection_id = 0;
+    this.node_unique_id = unique_id
+    this.node_network_id = network_id
+    this.node_mode = mode
 }
 
 //Port at which the server will be hosted
@@ -19,9 +18,9 @@ const server_port = 3000
 let current_initiator_id;
 let current_reflector_id;
 
-//"Lists" of connected nodes to the networks       Key              Value
-let node_connection_key_map = new Map();    // Socket.id       | node_network_id
-let node_list_map           = new Map();    // node_network_id | node
+//"Lists" of connected nodes to the networks
+let node_connection_key_map = new Map();
+let node_list_map           = new Map();
 
 //boolean to keep track if measurment is allowed
 let node_meas_start = false;
@@ -29,10 +28,15 @@ let node_meas_start = false;
 //Amount of nodes that were processed and added to the server
 let node_cnt = 0;
 
-//Send File When Connected aka the webpage
+let webside_mode = false;
+
+//Send website file when connected by browser
 app.get('/', (req, res) => {
-    //Add a check to verify if it a computer
-    res.sendFile('C:/Users/micha/Desktop/main.html');
+    if(webside_mode == false){
+        res.sendFile('C:/Users/micha/Desktop/main.html');
+    } else {
+        res.sendFile('C:/Users/micha/Desktop/node_test.html');
+    }
 });
 
 app.get(`/download_csv`,(req,res)=>{
@@ -48,7 +52,7 @@ app.get(`/download_csv`,(req,res)=>{
 })
 
 //Whenever someone connects this gets executed
-io.on('connection', (socket) => {
+io.on('connection', function(socket){
     //Inform Console that new user connected
     console.log('A user connected');
 
@@ -94,7 +98,7 @@ io.on('connection', (socket) => {
     /*
         * ON    - SVR_MEAS_STOP
         * FROM  - WEB
-        * TO    - RPI
+        * TO    - 
 
         - Recieve message for the server to stop the distance measurement program
     */
@@ -105,27 +109,51 @@ io.on('connection', (socket) => {
     })
 
     /*
+        * ON    - SVR_NODE_RESTART
+        * FROM  - WEB
+        * TO    - RPI
+
+        - Transmit message to a node causing them to restart henceforth redownload client and hexfile -> flash nrf
+    */
+    socket.on('SVR_NODE_RESTART',(data) => {
+        io.emit('SVR_NODE_RESTART', data);
+        console.log(`Restarting: ${data}`);
+    })
+    
+    /*
+        * ON    - SVR_NODE_MSG
+        * FROM  - WEB
+        * TO    - RPI
+    
+        - Transmit message to a node
+    */
+    socket.on('SVR_NODE_MSG', (data) => {
+        console.log(`MSG For Node: ${data}`);
+    })
+
+    /*
         * ON    - SVR_NODE_INIT
         * FROM  - RPI
-        * TO    - RPI | WEB
+        * TO    - RPI
+
+        * data - node_unique_id
 
         - Handle Node connection to the node network
-        ! Doesn't Trigger on webpage connection
+        ! Doesn't trigger on webpage connection
     */
-
-    socket.on("SVR_NODE_INIT", (data) => {
-        //Initialize Node if it was not detected
-        console.log("New Node Initialization")
-
+    socket.on("SVR_NODE_INIT", function(data){
         let new_node = new node(data,`RPI_NODE_${node_cnt}`, 'O')
+        
         new_node.connection_id      = socket.id;
 
         //Send New data to the node
         io.emit('RPI_NODE_DATA', new_node)
         io.emit('WEB_NODE_DATA', new_node)
 
-        node_connection_key_map.set ( socket.id,                 new_node.node_network_id);
-        node_list_map.set           ( new_node.node_network_id,  new_node);           
+        node_connection_key_map.set ( socket.id                 , new_node.node_network_id);
+        node_list_map.set           ( new_node.node_network_id  , new_node);   
+
+        console.log("New Node Initialization")    
     })
 
     /*
@@ -135,8 +163,12 @@ io.on('connection', (socket) => {
 
         - Processes JSON data send from the rpi to the server
     */
-    socket.on('SVR_DATA_CONTENT', (data) => {
+    socket.on('SVR_DATA_CONTENT',function(data){
         const time = new Date()
+
+        let csv_header = [`Initiator`,`Reflector`,`Time_local`,`i_local`,`q_local`,`i_remote`,`q_remote`,`hopping_sequence`,
+        `sinr_local`,`sinr_remote`,`ifft_mm`,`phase_slope_mm`,`rssi_openspace_mm`,`best_mm`,`highprec_mm`,
+        `link_loss_dB`,`duration_us`,`rssi_local_dB`,`rssi_remote_dB`,`txpwr_local_dB`,`txpwr_remote_dB`,`quality`]
 
         while(data[0] != '{'){
             data = data.slice(1);
@@ -144,10 +176,7 @@ io.on('connection', (socket) => {
 
         let json_data = JSON.parse(data)
 
-        let csv_header = [`Initiator`,`Reflector`,`Time_local`,`i_local`,`q_local`,`i_remote`,`q_remote`,`hopping_sequence`,
-        `sinr_local`,`sinr_remote`,`ifft_mm`,`phase_slope_mm`,`rssi_openspace_mm`,`best_mm`,`highprec_mm`,
-        `link_loss_dB`,`duration_us`,`rssi_local_dB`,`rssi_remote_dB`,`txpwr_local_dB`,`txpwr_remote_dB`,`quality`]
-
+        //Processed Measurement into csv string
         let csvContent = `${current_initiator_id},${current_reflector_id},${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}:${time.getMilliseconds()},[${json_data['i_local']}],[${json_data['q_local']}],[${json_data['i_remote']}],[${json_data['q_remote']}],[${json_data['hopping_sequence']}],[${json_data['sinr_local']}],[${json_data['sinr_remote']}],${json_data['ifft_mm']},${json_data['phase_slope_mm']},${json_data['rssi_openspace_mm']},${json_data['best_mm']},${json_data['highprec_mm']},${json_data['link_loss_dB']},${json_data['duration_us']},${json_data['rssi_local_dB']},${json_data['rssi_remote_dB']},${json_data['txpwr_local_dB']},${json_data['txpwr_remote_dB']},${json_data['quality']}`
         
         csvContent += line_end
@@ -179,9 +208,7 @@ io.on('connection', (socket) => {
 
         - On disconnect remove the disconnected node from the system
     */
-    socket.on('disconnect', (data) => {
-        console.log('A user disconnected');
-
+    socket.on('disconnect', () => {
         let node_data = node_connection_key_map.get(socket.id)
 
         io.emit('WEB_NODE_REMOVE', node_list_map.get(node_data));
@@ -189,6 +216,8 @@ io.on('connection', (socket) => {
         node_list_map.delete(node_data);
 
         node_connection_key_map.delete(socket.id)
+
+        console.log('A user disconnected');
     });
 });
 
@@ -246,6 +275,6 @@ setInterval(() => {
 }, 1000);
 
 // Start the Server at port 3000
-http.listen(server_port, () => {
+http.listen(server_port, function(){
    console.log('listening on port: ' + server_port);
 });
