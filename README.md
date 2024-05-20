@@ -69,7 +69,7 @@ node server_file_name.js
 ```bash
 192.168.10.187:3000 or localhost:3000
 ```
-7. For at nodeene skal være i stand til å koble seg opp til serveren din, Endr client.py filen. Definer IP'en du tidligere fant på linje 119:
+7. For at nodene skal være i stand til å koble seg opp til serveren din, Endr client.py filen. Definer IP'en du tidligere fant på linje 119:
 ```python
 sio.connect('http://IP:PORT', retry = True), example: sio.connect('http://192.168.2.12:3000', retry = True) 
 ```
@@ -82,7 +82,7 @@ Denne delen forklarer trinnvis hvordan nodene skal settes opp og programmeres. F
 3. Flash RPI SD kortet ved bruk av Raspberry Pi Imager, bildet nedenfor viser anbefalt konfigurasjon. (Huske å legge til Wi-Fi login og passord til nettverket du ønsker at nodene skal kobles på):<br />
    ![image](https://github.com/Michalstank/MaDChaSE-E2418/assets/31627253/1cca488a-f8cd-445a-be60-3683ddc801fe)
 
-5. Kobl opp RPI til strøm og deretter logg på Router / Access Point for å hente IP adressen til den.
+5. Legg inn SD-kortet i RPI og kobl enheten til strøm. Deretter logg på Router / Access Point for å hente IP adressen til den.
 6. Send over bashscript filen ved bruk av:
 ```bash
 scp PATH_TO_BASHSCRIPT rpi_navn@rpi_ip:/home/rpi_navn/
@@ -95,11 +95,11 @@ shh rpi_navn@rpi_ip
 ```bash
 chmod u+x bashscript_name.sh
 ```
-8. Nå det er mulig å kjøre Bashscript dersom man er i samme directory som den:
+8. Nå er det mulig å kjøre Bashscriptet dersom man er i samme directory som den:
 ```bash
 ./bashscript_name.sh
 ```
-9. Bashscript nå kan også bli konfigurert for å kjøre ved system start, det gjøres ved å legge path til den i rc.local fila:
+9. Bashscriptet kan nå også konfigureres til å kjøre ved systemstart. Dette gjøres ved å legge dens 'path' til rc.local filen:
 ```bash
 sudo nano /etc/rc.local
 ```
