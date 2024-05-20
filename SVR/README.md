@@ -13,5 +13,4 @@ I prosjektet ble det utviklet to forskjellige algoritmer for orkestrering av kan
 - Rng = Randomisert
 - List = Listebasert
 
-Den randomiserte algoritmen tildeller rollene i prosedyren på et randomisert vis. Under testing fører dette til en ujevn distribuering av par på nodenettverket. 
-
+Den randomiserte algoritmen er den første som ble implementert. Den tildeller rollene i prosedyren på et randomisert vis. Den fører til en ujevn distribusjon av nodepar. Liste-algoritmen skaper en liste med alle de mulige nodeparene og deretter itererer gjennom den. En slik tilnærming sikkrer en lik distribuering av nodepar. 
