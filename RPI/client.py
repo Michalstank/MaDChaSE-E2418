@@ -122,7 +122,7 @@ first_char = True
 header_char = ""
 output = []
 
-#Needs To be reworked for better uart communication, allowing for smooth 2 way communication
+
 while True:
 
 	#Read input from port
