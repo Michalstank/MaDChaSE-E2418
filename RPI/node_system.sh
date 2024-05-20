@@ -71,7 +71,6 @@ while getopts "pjrdfs" arg; do
 		#Run the server
 		s) 
 			python client.py
-			flag_p=$OPTARG
 		;;
 	esac
 done
