@@ -13,27 +13,20 @@
         }
     </style>
     
+    <!-- Imports the library of socketio to the website -->
+    <!-- Its necessary that they are in two separate script fields -->
     <script src="/socket.io/socket.io.js"></script>
     <script>
+        
+        const W_Client = io()
+
         const max_rand_id_val = 100_000_000
 
-        const W_Client = io()
-    
-        document.onkeypress = (e) => {
-            if(e.key == 's'){
-                W_Client.emit('SVR_WEB_MODE_CHANGE', 0);
-            }
-        }
-
+        //Creates local node object
         function node_init(id, mode){
-            this.node_unique_id = rand_data() 
+            this.node_unique_id = rand_info(max_rand_id_val) 
             this.node_network_id = id
             this.node_mode = mode
-        }
-
-        function node_info(id, data){
-            this.node_id = id
-            this.node_data = data
         }
 
         function node_update_role(mode){
@@ -59,11 +52,8 @@
             }
         }
     
+        //node information variable an start values
         var node_data = new node_init(0, 0, 0)
-
-        function rand_data(){
-            return Math.floor(Math.random() * max_rand_id_val)
-        }
 
         function rand_info(max_val){
             return Math.floor(Math.random() * max_val);
@@ -91,6 +81,27 @@
                 "quality": 0}`
         }
 
+
+        /*
+            * ON    - User Input
+            * FROM  - 
+            * TO    - SVR
+
+            - Changes the mode of the website
+        */
+        document.onkeypress = (e) => {
+            if(e.key == 's'){
+                W_Client.emit('SVR_WEB_MODE_CHANGE', 0);
+            }
+        }
+
+        /*
+            * ON    - connect
+            * FROM  - SVR
+            * TO    - SVR
+
+            - Initializes the simulator node on the server and sets the start values
+        */
         W_Client.on('connect', function(data){
             W_Client.emit("SVR_NODE_INIT", node_data.node_unique_id)
             document.getElementById("node_unique_id").innerHTML = node_data.node_unique_id
@@ -99,11 +110,27 @@
             document.getElementById("node_data").innerHTML = gen_data();
         })
 
+
+        /*
+            * ON    - disconnect
+            * FROM  - SVR
+            * TO    - 
+
+            - Changes the displayed information
+        */
         W_Client.on('disconnect', function(data){
             document.getElementById("node_status").innerHTML = "Disconnected"
             document.getElementById("node_status").style.backgroundColor = "red"
         })
 
+        
+        /*
+            * ON    - RPI_DATA_REQUEST
+            * FROM  - SVR
+            * TO    - SVR
+
+            - Transmit measurement data and generate new
+        */
         W_Client.on('RPI_DATA_REQUEST', function(data){
             if(node_data.node_network_id == data.node_network_id){
                 var info = document.getElementById('node_data').innerHTML
@@ -112,6 +139,13 @@
             }
         })
 
+        /*
+            * ON    - RPI_NODE_DATA
+            * FROM  - SVR
+            * TO    - 
+
+            - Processes the assigned role/information about the node from the server
+        */
         W_Client.on('RPI_NODE_DATA', function(data){
             if(data.node_unique_id == node_data.node_unique_id){
                 node_data.node_network_id = data.node_network_id
@@ -122,6 +156,14 @@
             }
         })
 
+        
+        /*
+            * ON    - RPI_ROLE_UPDATE
+            * FROM  - SVR
+            * TO    - 
+
+            - Updates the role and node information on role change
+        */
         W_Client.on('RPI_ROLE_UPDATE', function(data){
 
             if(data.node_network_id == node_data.node_network_id){
@@ -130,14 +172,16 @@
             }
         })
 
+        /*
+            * ON    - RPI_NODE_RESET
+            * FROM  - SVR
+            * TO    - 
+
+            - Resets the role of the node to nothing
+        */        
         W_Client.on('RPI_NODE_RESET', function(data){
             node_data.node_mode = 'O'
             node_update_role(node_data.node_mode);
-        })
-
-        W_Client.on('RPI_LOST', (data) => {
-            console.log("Balls")
-            W_Client.emit('SVR_RPI_ON', node_data.node_network_id)
         })
     </script>
     

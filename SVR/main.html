@@ -186,7 +186,7 @@
         * FROM  - 
         * TO    - SVR
 
-        - Changes the mode of the website to function as a simulator
+        - Changes the mode of the website
     */
     document.onkeypress = (e) => {
       if(e.key == 's'){
@@ -291,9 +291,9 @@
 <div class="container">
   <!-- Side Menu Display -->
   <div id="side_menu">
-    <button class="code_download" onclick="window.open('https://github.com/Michalstank/TEST-DOWNLOAD-REPO/blob/main/client.py',  '_blank', 'location=yes,height=570,width=820,scrollbars=yes,status=yes')"> Change Client.py Code </button>
+    <button class="code_download" onclick="window.open('https://github.com/Michalstank/MaDChaSE-E2418-Fastvare/blob/main/client.py',  '_blank', 'location=yes,height=570,width=820,scrollbars=yes,status=yes')"> Change Client.py Code </button>
     <p></p>
-    <button class="code_download" onclick="window.open('https://github.com/Michalstank/TEST-DOWNLOAD-REPO/blob/main/zephyr.hex', '_blank', 'location=yes,height=570,width=820,scrollbars=yes,status=yes')"> Change Hexfile Code </button>
+    <button class="code_download" onclick="window.open('https://github.com/Michalstank/MaDChaSE-E2418-Fastvare/blob/main/zephyr.hex', '_blank', 'location=yes,height=570,width=820,scrollbars=yes,status=yes')"> Change Hexfile Code </button>
     <p class="line"></p>
     <button class="code_download" onclick="node_update_all()"> Update All Nodes </button>
     <p></p>
@@ -302,7 +302,6 @@
     <button class="code_download" onclick="node_stop_meas()"> Stop Measurement </button>
     <p></p>
     <button class="code_download" id="download_button"> Download CSV File </button>
-    <!--<a class="code_download" href="http://localhost:3000/download_csv" download> Balls? </a> -->
     <script>
     document.getElementById('download_button').addEventListener('click', () => {
       window.location = 'http://localhost:3000/download_csv';
