@@ -10,8 +10,10 @@ Dette er repositoriet for bacheloroppgaven "MaDChaSE", i forbindelse med studier
 Alle relevante filer inkludert dette databladet finnes under følgende link: https://github.com/Michalstank/MaDChaSE-E2418
 
 ## Innholdsfortegnelse
+1. [Systemarkitektur](#systemarkitektur)
+1. [Requirements](#Requirements)
+	2.[test]() 
 1. [Guide for oppsett](#guide-for-oppsett)
-    1. [Requirements](#Requirements)
     2. [Hardware Oppsett](#Hardware-Oppsett)
     3. [Server Oppsett](#Server-Oppsett)
     4. [Distribusjon av fastvare](#distribusjon-av-fastvare)
