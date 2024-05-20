@@ -18,8 +18,10 @@ Alle relevante filer inkludert dette databladet finnes under følgende link: htt
     1. [Flagg Oversikt](#flagg-oversikt)
     2. [Flagg Kode](#flagg-kode)
   
+  
+  
 # Systemarkitektur
-Det utviklede systemet baserer seg på noder i form av nRF52833 Dk. og RPI 3B+. nRF-enheten gjennomfører kanalmålinger, mens RPI 3B+ står for nettverkskommunikasjon og distribuerer fastvare nødvendig for målingene. En server brukes som mellomleddet mellom nodene og brukergrensesnittet. Serveren kommuniserer med nodene over et WiFi-nettverk og står for kanalmålingsorkestrering og samhandling. Brukergrensesnittet er i form av en nettside. 
+Det utviklede systemet baserer seg på noder i form av [nRF52833 Dk.]( https://www.nordicsemi.com/Products/Development-hardware/nRF52833-DK) og RPI 3B+. nRF-enheten gjennomfører kanalmålinger, mens RPI 3B+ står for nettverkskommunikasjon og distribuerer fastvare nødvendig for målingene. En server brukes som mellomleddet mellom nodene og brukergrensesnittet. Serveren kommuniserer med nodene over et WiFi-nettverk og står for kanalmålingsorkestrering og samhandling. Brukergrensesnittet er i form av en nettside. 
 ![image](https://github.com/shakerhoudini/VHDL/blob/9421bcb0c60f7aab8808be60aede336b4b58db95/blok_diag.png)
 
 # Requirements
