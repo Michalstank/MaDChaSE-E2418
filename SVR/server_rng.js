@@ -33,9 +33,9 @@ let webside_mode = false;
 //Send website file when connected by browser
 app.get('/', (req, res) => {
     if(webside_mode == false){
-        res.sendFile('C:/Users/micha/Desktop/main.html');
+        res.sendFile(__dirname+'/main.html');
     } else {
-        res.sendFile('C:/Users/micha/Desktop/node_test.html');
+        res.sendFile(__dirname+'/node_test.html');
     }
 });
 
