@@ -34,10 +34,10 @@ while getopts "pjrdfs" arg; do
 			sudo rm zephyr.hex
 
 			#Download python client code
-			wget --no-check-certificate "https://raw.githubusercontent.com/Michalstank/TEST-DOWNLOAD-REPO/main/client.py"
+			wget --no-check-certificate "https://raw.githubusercontent.com/Michalstank/MaDChaSE-E2418-Fastvare/main/client.py"
 
 			#Download hexfile code
-			wget --no-check-certificate "https://raw.githubusercontent.com/Michalstank/TEST-DOWNLOAD-REPO/main/zephyr.hex"
+			wget --no-check-certificate "https://raw.githubusercontent.com/Michalstank/MaDChaSE-E2418-Fastvare/main/zephyr.hex"
 		;;
 		#Flash Using JLink
 		f)	
