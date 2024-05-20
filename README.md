@@ -20,7 +20,7 @@ Alle relevante filer inkludert dette databladet finnes under følgende link: htt
     3. [Server Oppsett](#Server-Oppsett)
     4. [Distribusjon av fastvare](#distribusjon-av-fastvare)
     5. [RPI Oppsett](#RPI-Oppsett)
-5. Bashscript
+5. [Bashscript](#bashscript)
     1. [Flagg Oversikt](#flagg-oversikt)
     2. [Flagg Kode](#flagg-kode)
   
@@ -120,6 +120,7 @@ sudo nano /etc/rc.local
 ./home/rpi_navn/bashscript_navn.sh
 ```
 
+# Bashscript
 ## Flagg Oversikt
 
 | Flag | Funksjon |
