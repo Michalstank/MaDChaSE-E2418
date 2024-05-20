@@ -78,7 +78,6 @@ def RPI_NODE_DATA(svr_data):
 def RPI_NODE_RESET(svr_data):
 	#Universal Command, ID check Not Needed
 	node_info.node_mode = "None"
-	#print(node_info.node_mode)
 	global node_data_expected
 	node_data_expected = False
 	port.write("None.".encode())
@@ -122,9 +121,7 @@ first_char = True
 header_char = ""
 output = []
 
-
 while True:
-
 	#Read input from port
 	var = port.read();
 
@@ -188,6 +185,4 @@ while True:
 
 				#Reset waiting for char
 				first_char = True
-
-#"Infinite" Loop ish
 sio.wait()
