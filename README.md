@@ -46,7 +46,7 @@ Det utviklede systemet baserer seg på noder i form av [nRF52833 Dk.]( https://w
 # Guide for oppsett
 
 ## Hardware oppsett
-RPI 3B+ og nRF52833 Dk. som utgjør nodene, kommuniserer med hverandre ved hjelp av UART-protokollen. 
+RPI 3B+ og nRF52833 Dk. som utgjør nodene, kommuniserer med hverandre ved hjelp av UART-protokollen. Kobl derfor 
 
 Det ble utviklet en innkapsling til nodene som kan [3D.printes](https://github.com/Michalstank/MaDChaSE-E2418/tree/48b5f4ba134b89f2b8a7d6ff9e974852505d02e9/Extras)
 ![image](https://github.com/shakerhoudini/VHDL/blob/395771d89b2dca0d43f5f726d94a6666bfbc4f7c/Nodes.png)
@@ -57,18 +57,18 @@ RPI skal kobles til strøm og nRF skal kobles til en av USB-A portene på RPI.
 Denne delen har som formål å vise de nødvendige stegene for å sette opp serveren. 
 
 1. Last ned [Server Files](https://github.com/Michalstank/MaDChaSE-E2418/tree/main/SVR).
-2. Unpakk filene og bestem hvilken algoritme du ønsker å bruke.
+2. Utpakk filene og bestem hvilken algoritme du ønsker å bruke (list eller rng.).
 3. Start 'Node.js Command Prompt'
 4. Start serveren ved å skrive inn følgende kommando:
 ```bash
 node server_file_name.js
 ```
-5. Om det blir feil dobbelsjek at alle filene er i samme mappe.
-6. Man kan logge på brukergrensesnittet ved å først finne IP-en til datamaskinen der serveren er hosted og legge til dens port på følgende form: IP:PORT. For å nå brukergrensesnittet skriv deretter den sammensatte IP-en og porten inn i nettleseren.
+5. Om det forekommer en feil, dobbelsjekk at alle filene er i samme mappe.
+6. For å logge på brukergrensesnittet, finn først IP-en til datamaskinen der serveren skal 'hostes' og legg til dens port på følgende form: IP:PORT. For å nå brukergrensesnittet skriv deretter den sammensatte IP-en og porten inn i nettleseren.
 ```bash
 192.168.10.187:3000 or localhost:3000
 ```
-7. Edit client.py fil for å endre tilkoblings IP'en. Det finnes på linje 119:
+7. For at RPI-ene skal koble seg opp til serveren din, Endr client.py filen. Definer IP'en du tidligere fant på linje 119:
 ```python
 sio.connect('http://IP:PORT', retry = True), example: sio.connect('http://192.168.2.12:3000', retry = True) 
 ```
