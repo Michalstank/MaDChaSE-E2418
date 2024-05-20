@@ -34,9 +34,9 @@ Det utviklede systemet baserer seg på noder i form av [nRF52833 Dk.]( https://w
 - USB-A til Micro-USB-B kabel
 
 ## Software 
-- Mulighet for å sjekke IP av enheter koblet til Routeren / Access Point
 - Minst versjon av NodeJS v18.13.0
 - Node pakkene: socketio, express.
+- Mulighet for å sjekke IP av enheter koblet til Routeren / Access Point
 ## nRF Libraries
 - <zephyr/kernel.h>
 - <zephyr/gpio.h>
