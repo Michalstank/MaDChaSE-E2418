@@ -214,7 +214,6 @@ Nodenes fastvare oppdateres ved hjelp av et Bash script. Det anvendes for å las
 #Run the server
 	s) 
 		python client.py
-		flag_p=$OPTARG
 	;;
 ```
 
