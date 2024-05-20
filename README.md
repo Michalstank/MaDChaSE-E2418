@@ -20,7 +20,7 @@ Alle relevante filer inkludert dette databladet finnes under følgende link: htt
     3. [Server Oppsett](#Server-Oppsett)
     4. [Distribusjon av fastvare](#distribusjon-av-fastvare)
     5. [RPI Oppsett](#RPI-Oppsett)
-5. [Bash Script](#bashscript)
+5. [Bash Script](#bash-script)
     1. [Flagg Oversikt](#flagg-oversikt)
     2. [Flagg Kode](#flagg-kode)
   
