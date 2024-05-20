@@ -40,7 +40,7 @@ Det utviklede systemet baserer seg på noder i form av [nRF52833 Dk.]( https://w
 ## Software 
 - Minst versjon av NodeJS v18.13.0
 - Node pakkene: socketio, express.
-- Mulighet for å sjekke IP av enheter koblet til Routeren / Access Point
+- Mulighet for å sjekke IP av enheter koblet til Routeren / Access Point (Eksampel: Ved å legge på router sjekk om du har mulighet for henting av ip adresser til alle koblet enheter)
 
 ## nRF Libraries
 - <zephyr/kernel.h>
