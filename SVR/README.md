@@ -1,3 +1,7 @@
-Innhold: 
+# Innhold: 
 
-I denne mappen finnes filene nødvendig for å kjøre serveren og brukergrensesnittet. Dette inkluderer følgende filer: 
+I denne mappen finnes følgende filer:
+
+- main.html = Brukergrensesnittet.
+- server_list.js eller server_rng.js = to varianter av koden for serveren.
+- node_test.html = Simulator
