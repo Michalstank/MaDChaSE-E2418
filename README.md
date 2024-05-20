@@ -77,7 +77,7 @@ sio.connect('http://IP:PORT', retry = True); example: sio.connect('http://192.16
 
 ## Oppsett av fastvare til nodene:
 
-Nodene i prosjektet henter programvaren sin fra et gitt [Github Repo.]() Om du har lyst til å endre hvilket repo det lastes ned fra, endr linken i flagg ['-d'](#flagg--d-kode) i bashscript til ønsket repo. HUSK: linken som erstattes skal være til en 'raw' format av filen på github. Dette gir deg muligheten å laste opp ny fastvare du vil teste ut.
+Nodene i prosjektet henter programvaren sin fra et gitt [Github Repo.]() Om du har lyst å endre hvilket repo fastvaren lastes ned fra, endr linken i flagg ['-d'](#flagg--d-kode) i bashscriptet til ønsket repo. HUSK: linken som erstattes skal være til et 'raw' format av filen på github. Dette gir deg muligheten til å teste ut din egen fastvare på nodene. 
 
 ## RPI Oppsett
 
