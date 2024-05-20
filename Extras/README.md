@@ -5,4 +5,4 @@ Dette er en mappe som inneholder andre relevante ting for prosjektet. Dette inkl
 - Plotting av data
 - Rå data fra de gjennomførte testene. 
 
-I den endelige løsingen serveren ble satt opp for å behandle csv data i pandas friendly måte, før gruppen gikk for økt readability i stedet.
+I den endelige løsingen ble serveren satt opp for å behandle data på en måte som tilrettelegger for videre prosessering ved hjelp av python bibliotek som pandas. Under gruppens tester ble et alternativt format brukt, for å øke lesbarheten. 
